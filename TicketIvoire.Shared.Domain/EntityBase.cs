@@ -7,7 +7,7 @@ public abstract class EntityBase
 {
     public Guid Id { get; protected set; } = Guid.NewGuid();
 
-    protected static void CheckRule(IBusinessRule rule)
+    public static void CheckRule(IBusinessRule rule)
     {
         if (!rule.Validate())
         {

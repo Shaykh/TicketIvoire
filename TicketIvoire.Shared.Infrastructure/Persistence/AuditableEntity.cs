@@ -11,12 +11,15 @@ public class AuditableEntity
     public Guid? UpdatedBy { get; protected set; }
     public Guid? CreatedBy { get; protected set; }
 
-    protected AuditableEntity()
+    public AuditableEntity()
     {
         Id = Guid.NewGuid();
         CreatedAt = DateTime.UtcNow;
         UpdatedAt = DateTime.UtcNow;
     }
+
+    public AuditableEntity(Guid createdBy) : this() 
+        => CreatedBy = createdBy;
 
     public void Delete(Guid deletedBy)
     {

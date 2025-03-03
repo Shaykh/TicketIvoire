@@ -10,7 +10,7 @@ public static class MassTransitConfigurator
     public const string ReceiveAllEvents = "#";
 
     public static RabbitMqConfigurationOption GetRabbitMqConfiguration(this IConfiguration configuration)
-        => configuration.GetConfigOption<RabbitMqConfigurationOption>(nameof(RabbitMqConfigurationOption));
+        => configuration.GetConfigOption<RabbitMqConfigurationOption>(RabbitMqConfigurationOption.AppSettingsPathKey);
 
     public static void ConfigureMassTransitConsumer<TConsumer, TMessage>(this IRabbitMqBusFactoryConfigurator rabbitMqBusFactoryConfigurator, 
         IBusRegistrationContext busRegistrationContext, 
