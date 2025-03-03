@@ -9,7 +9,12 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation" />
     <PackageReference Include="MediatR" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TicketIvoire.Shared.Domain\TicketIvoire.Shared.Domain.csproj" />
   </ItemGroup>
 
 </Project>

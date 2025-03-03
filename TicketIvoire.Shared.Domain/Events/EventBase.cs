@@ -1,6 +1,6 @@
 ﻿namespace TicketIvoire.Shared.Domain.Events;
 
-public class EventBase : IEvent
+public record EventBase : IEvent
 {
     public Guid Id { get; init; } = Guid.NewGuid();
 
