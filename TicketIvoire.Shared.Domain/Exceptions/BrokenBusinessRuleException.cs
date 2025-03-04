@@ -16,6 +16,7 @@ public class BrokenBusinessRuleException : Exception
     {
     }
 
+    [System.Diagnostics.CodeAnalysis.SetsRequiredMembers]
     public BrokenBusinessRuleException(IBusinessRule brokenRule) => BrokenRule = brokenRule;
 
     public BrokenBusinessRuleException(string message) : base(message)

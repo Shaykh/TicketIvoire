@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TicketIvoire.Administration.Domain\TicketIvoire.Administration.Domain.csproj" />
+    <ProjectReference Include="..\TicketIvoire.Shared.Application\TicketIvoire.Shared.Application.csproj" />
+  </ItemGroup>
+
+</Project>

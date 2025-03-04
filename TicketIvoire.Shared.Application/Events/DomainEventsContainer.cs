@@ -15,4 +15,10 @@ public class DomainEventsContainer : IDomainEventsContainer
 
         _domainEvents.Add(domainEvent);
     }
+
+    public void AddEvents(IEnumerable<IDomainEvent> domainEvents)
+    {
+        ArgumentNullException.ThrowIfNull(domainEvents);
+        _domainEvents.AddRange(domainEvents);
+    }
 }
