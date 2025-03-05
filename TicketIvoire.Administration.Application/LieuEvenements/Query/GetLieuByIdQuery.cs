@@ -12,7 +12,7 @@ public class GetLieuByIdQueryHandler(ILogger<GetLieuByIdQueryHandler> logger,
     public async Task<GetLieuResponse> Handle(GetLieuByIdQuery query, CancellationToken cancellationToken)
     {
         logger.LogInformation("Entree Query Get Lieu By Id: {LieuId}", query.Id);
-        Lieu lieu = await lieuRepository.GetLieuByIdAsync(query.Id);
+        Lieu lieu = await lieuRepository.GetByIdAsync(query.Id);
         var response = lieu.ToGetLieuResponse();
         logger.LogInformation("Sortie Query Get Lieu By Id Response: {Response}", response);
         return response;

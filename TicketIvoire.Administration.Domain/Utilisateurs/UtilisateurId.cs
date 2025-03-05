@@ -2,6 +2,4 @@
 
 namespace TicketIvoire.Administration.Domain.Utilisateurs;
 
-public record UtilisateurId(Guid Value) : TypeIdBase(Value)
-{
-}
+public record UtilisateurId(Guid Value) : TypeIdBase(Value);

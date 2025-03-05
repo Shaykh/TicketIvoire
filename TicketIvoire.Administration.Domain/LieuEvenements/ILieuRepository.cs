@@ -2,8 +2,8 @@
 
 public interface ILieuRepository
 {
-    Task<Lieu> GetLieuByIdAsync(Guid lieuId);
-    Task<IEnumerable<Lieu>> GetAllLieuxAsync(uint? pageNumber, uint? numberByPage);
-    Task<IEnumerable<Lieu>> GetLieuxByVilleAsync(string ville);
-    Task<IEnumerable<Lieu>> GetLieuxByCapaciteRangeAsync(uint? minimum, uint? maximum);
+    Task<Lieu> GetByIdAsync(Guid lieuId);
+    Task<IEnumerable<Lieu>> GetAllAsync(uint? pageNumber, uint? numberByPage);
+    Task<IEnumerable<Lieu>> GetAllByVilleAsync(string ville);
+    Task<IEnumerable<Lieu>> GetAllByCapaciteRangeAsync(uint? minimum, uint? maximum);
 }

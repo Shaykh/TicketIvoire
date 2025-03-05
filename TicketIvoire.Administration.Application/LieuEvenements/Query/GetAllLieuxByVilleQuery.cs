@@ -12,7 +12,7 @@ public class GetAllLieuxByVilleQueryHandler(ILogger<GetAllLieuxByVilleQueryHandl
     public async Task<IEnumerable<GetLieuResponse>> Handle(GetAllLieuxByVilleQuery query, CancellationToken cancellationToken)
     {
         logger.LogInformation("Entree Query Get All Lieux By Ville: {Ville}", query.Ville);
-        IEnumerable<Lieu> lieux = await lieuRepository.GetLieuxByVilleAsync(query.Ville);
+        IEnumerable<Lieu> lieux = await lieuRepository.GetAllByVilleAsync(query.Ville);
         IEnumerable<GetLieuResponse> response = lieux.Select(lieu => lieu.ToGetLieuResponse());
         logger.LogInformation("Sortie Query Get All Lieux By Ville: {Ville}, Nombre: {Count}", query.Ville, response.Count());
         return response;

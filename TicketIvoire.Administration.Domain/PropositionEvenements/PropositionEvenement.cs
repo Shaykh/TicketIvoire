@@ -3,7 +3,6 @@ using TicketIvoire.Administration.Domain.PropositionEvenements.Events;
 using TicketIvoire.Administration.Domain.PropositionEvenements.Rules;
 using TicketIvoire.Administration.Domain.Utilisateurs;
 using TicketIvoire.Shared.Domain;
-using TicketIvoire.Shared.Domain.BusinessRules;
 
 namespace TicketIvoire.Administration.Domain.PropositionEvenements;
 
@@ -20,9 +19,9 @@ public class PropositionEvenement : EntityBase, IAggregateRoot
     public required UtilisateurId UtilisateurId { get; set; }
 
     [SetsRequiredMembers]
-    private PropositionEvenement(PropositionEvenementId id, UtilisateurId utilisateurId, string nom, string description, DateTime dateDebut, DateTime dateFin, PropositionLieu lieu)
+    private PropositionEvenement(UtilisateurId utilisateurId, string nom, string description, DateTime dateDebut, DateTime dateFin, PropositionLieu lieu)
     {
-        Id = id;
+        Id = new PropositionEvenementId(Guid.NewGuid());
         Nom = nom;
         Description = description;
         DateDebut = dateDebut;
@@ -33,12 +32,11 @@ public class PropositionEvenement : EntityBase, IAggregateRoot
         RegisterEvent(new PropositionEvenementCreeEvent(Id.Value, UtilisateurId.Value, Nom, Description, DateDebut, DateFin, Lieu));
     }
 
-    public static PropositionEvenement Create(PropositionEvenementId id, UtilisateurId utilisateurId, string nom, string description, DateTime dateDebut, DateTime dateFin, PropositionLieu lieu)
+    public static PropositionEvenement Create(UtilisateurId utilisateurId, string nom, string description, DateTime dateDebut, DateTime dateFin, PropositionLieu lieu)
     {
-        CheckRule(new IdMustBeValidRule(id.Value));
         CheckRule(new DatesMustBeValidRule(dateDebut, dateFin));
         CheckRule(new PropositionLieuMustBeValidRule(lieu));
-        var newPropositionEvenement = new PropositionEvenement(id, utilisateurId, nom, description, dateDebut, dateFin, lieu);
+        var newPropositionEvenement = new PropositionEvenement(utilisateurId, nom, description, dateDebut, dateFin, lieu);
         return newPropositionEvenement;
     }
 

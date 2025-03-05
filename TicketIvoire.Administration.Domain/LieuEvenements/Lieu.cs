@@ -16,21 +16,21 @@ public class Lieu : EntityBase, IAggregateRoot
     public LieuCoordonneesGeographiques? CoordonneesGeographiques { get; set; }
 
     [SetsRequiredMembers]
-    private Lieu(Guid id, string nom, string description, string adresse, string ville, uint? capacite)
+    private Lieu(string nom, string description, string adresse, string ville, uint? capacite)
     {
-        Id = new LieuId(id);
+        Id = new LieuId(Guid.NewGuid());
         Nom = nom;
         Description = description;
         Adresse = adresse;
         Ville = ville;
         Capacite = capacite;
-        RegisterEvent(new LieuAjouteeEvent(Id.Value, Capacite, Nom, Description, Adresse, Ville));
+        RegisterEvent(new LieuAjouteEvent(Id.Value, Capacite, Nom, Description, Adresse, Ville));
     }
 
-    public static Lieu Create(Guid id, string nom, string description, string adresse, string ville, uint? capacite)
+    public static Lieu Create(string nom, string description, string adresse, string ville, uint? capacite)
     {
         CheckRule(new LieuInformationMustBeValidRule(nom, description, adresse, ville));
-        var newLieu = new Lieu(id, nom, description, adresse, ville, capacite);
+        var newLieu = new Lieu(nom, description, adresse, ville, capacite);
         return newLieu;
     }
 
@@ -42,14 +42,19 @@ public class Lieu : EntityBase, IAggregateRoot
         Adresse = adresse;
         Ville = ville;
         Capacite = capacite;
-        RegisterEvent(new LieuModifieeEvent(Id.Value, Capacite, Nom, Description, Adresse, Ville));
+        RegisterEvent(new LieuModifieEvent(Id.Value, Capacite, Nom, Description, Adresse, Ville));
     }
 
     public void DefinirCoordonneesGeographiques(LieuCoordonneesGeographiques coordonneesGeographiques)
     {
+        CheckRule(new CoordonneesGeographiquesMustBeValidRule(coordonneesGeographiques.Latitude, coordonneesGeographiques.Longitude));
         CoordonneesGeographiques = coordonneesGeographiques;
         RegisterEvent(new LieuCoordonneesGeographiquesDefiniesEvent(Id.Value, CoordonneesGeographiques.Latitude, CoordonneesGeographiques.Longitude));
     }
 
-    public void Supprimer() => RegisterEvent(new LieuRetireeEvent(Id.Value));
+    public void Supprimer(string raisons)
+    {
+        CheckRule(new SuppressionRaisonsMustBeValidRule(raisons));
+        RegisterEvent(new LieuRetireEvent(Id.Value, raisons));
+    }
 }

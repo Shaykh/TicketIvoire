@@ -19,9 +19,9 @@ public class Membre : EntityBase, IAggregateRoot
     public StatutAdhesion StatutAdhesion { get; set; }
 
     [SetsRequiredMembers]
-    private Membre(Guid id, string login, string email, string nom, string prenom, string telephone, DateTime dateAdhesion)
+    private Membre(string login, string email, string nom, string prenom, string telephone, DateTime dateAdhesion)
     {
-        Id = new MembreId(id);
+        Id = new MembreId(Guid.NewGuid());
         Login = login;
         Email = email;
         Nom = nom;
@@ -32,13 +32,12 @@ public class Membre : EntityBase, IAggregateRoot
         RegisterEvent(new MembreCreeEvent(Id.Value, Login, Email, Nom, Prenom, Telephone, DateAdhesion));
     }
 
-    public static Membre Create(Guid id, string login, string email, string nom, string prenom, string telephone, DateTime dateAdhesion)
+    public static Membre Create(string login, string email, string nom, string prenom, string telephone, DateTime dateAdhesion)
     {
-        CheckRule(new IdMustBeValidRule(id));
         CheckRule(new LoginMustBeValidRule(login));
         CheckRule(new EmailMustBeValidRule(email));
         CheckRule(new TelephoneMustBeValidRule(telephone));
-        var newMembre = new Membre(id, login, email, nom, prenom, telephone, dateAdhesion);
+        var newMembre = new Membre(login, email, nom, prenom, telephone, dateAdhesion);
 
         return newMembre;
     }
@@ -55,15 +54,15 @@ public class Membre : EntityBase, IAggregateRoot
         RegisterEvent(new MembreRefuseEvent(Id.Value));
     }
 
-    public void Desactiver()
+    public void Desactiver(string raisons)
     {
         EstActif = false;
-        RegisterEvent(new MembreDesactiveEvent(Id.Value));
+        RegisterEvent(new MembreDesactiveEvent(Id.Value, raisons));
     }
 
-    public void Reactiver()
+    public void Reactiver(string raisons)
     {
         EstActif = true;
-        RegisterEvent(new MembreReactiveEvent(Id.Value));
+        RegisterEvent(new MembreReactiveEvent(Id.Value, raisons));
     }
 }
