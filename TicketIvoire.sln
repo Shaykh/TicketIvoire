@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketIvoire.Administration
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketIvoire.Administration.Application", "TicketIvoire.Administration.Application\TicketIvoire.Administration.Application.csproj", "{19A8FD9D-CB11-4AD4-8D5D-9FCC439A763C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketIvoire.Administration.Infrastructure", "TicketIvoire.Administration.Infrastructure\TicketIvoire.Administration.Infrastructure.csproj", "{BAC939EF-B4BC-4A83-8E80-BB844B54C9EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +80,10 @@ Global
 		{19A8FD9D-CB11-4AD4-8D5D-9FCC439A763C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19A8FD9D-CB11-4AD4-8D5D-9FCC439A763C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19A8FD9D-CB11-4AD4-8D5D-9FCC439A763C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAC939EF-B4BC-4A83-8E80-BB844B54C9EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAC939EF-B4BC-4A83-8E80-BB844B54C9EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAC939EF-B4BC-4A83-8E80-BB844B54C9EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAC939EF-B4BC-4A83-8E80-BB844B54C9EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +99,7 @@ Global
 		{AC0DDF09-BDEA-434C-8F86-AD34F6A7CFBD} = {474962AF-7643-456E-B46B-9F952DD646E0}
 		{C704F9D5-F687-4863-9025-264E7D62E2A4} = {20B9CA39-147F-4B2B-8F9B-35CED8317F81}
 		{19A8FD9D-CB11-4AD4-8D5D-9FCC439A763C} = {20B9CA39-147F-4B2B-8F9B-35CED8317F81}
+		{BAC939EF-B4BC-4A83-8E80-BB844B54C9EC} = {20B9CA39-147F-4B2B-8F9B-35CED8317F81}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0030CFB4-D104-4AFC-9F48-FA9974894BD9}

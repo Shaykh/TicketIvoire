@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Persistence\LieuEvenements\" />
+    <Folder Include="Persistence\PropositionEvenements\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TicketIvoire.Administration.Application\TicketIvoire.Administration.Application.csproj" />
+    <ProjectReference Include="..\TicketIvoire.Shared.Infrastructure\TicketIvoire.Shared.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
