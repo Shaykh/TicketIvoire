@@ -37,7 +37,7 @@ public class PropositionEvenement : EntityBase, IAggregateRoot
     {
         CheckRule(new IdMustBeValidRule(id.Value));
         CheckRule(new DatesMustBeValidRule(dateDebut, dateFin));
-        CheckRule(new PropositionLieuMustBeValideRule(lieu));
+        CheckRule(new PropositionLieuMustBeValidRule(lieu));
         var newPropositionEvenement = new PropositionEvenement(id, utilisateurId, nom, description, dateDebut, dateFin, lieu);
         return newPropositionEvenement;
     }

@@ -3,8 +3,8 @@
 public interface IMembreRepository
 {
     Task<Membre> GetByIdAsync(MembreId id);
-    Task<Membre> GetByLoginAsync(string login);
-    Task<Membre> GetByEmailAsync(string email);
-    Task<Membre> GetByTelephoneAsync(string telephone);
-    Task<IEnumerable<Membre>> GetAllAsync(string? name);
+    Task<IEnumerable<Membre>> GetAllAsync(uint? pageNumber, uint? numberByPage);
+    Task<IEnumerable<Membre>> GetAllByStatutAdhesionAsync(StatutAdhesion statutAdhesion, uint? pageNumber, uint? numberByPage);
+    Task<int> GetCountByStatutAdhesionAsync(StatutAdhesion statutAdhesion);
+    Task<int> GetAllCountAsync();
 }

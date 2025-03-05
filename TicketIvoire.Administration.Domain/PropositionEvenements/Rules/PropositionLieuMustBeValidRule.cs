@@ -2,7 +2,7 @@
 
 namespace TicketIvoire.Administration.Domain.PropositionEvenements.Rules;
 
-public class PropositionLieuMustBeValideRule(PropositionLieu propositionLieu) : IBusinessRule
+public class PropositionLieuMustBeValidRule(PropositionLieu propositionLieu) : IBusinessRule
 {
     public string Message => "Le lieu de la proposition doit être correctement renseigné.";
     public bool Validate()

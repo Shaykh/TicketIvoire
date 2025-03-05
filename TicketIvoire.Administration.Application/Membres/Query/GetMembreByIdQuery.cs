@@ -2,11 +2,9 @@
 using TicketIvoire.Administration.Domain.Membres;
 using TicketIvoire.Shared.Application.Queries;
 
-namespace TicketIvoire.Administration.Application.Membres;
+namespace TicketIvoire.Administration.Application.Membres.Query;
 
-public record GetMembreByIdQuery(Guid Id) : IQuery<GetMembreResponse>
-{
-}
+public record GetMembreByIdQuery(Guid Id) : IQuery<GetMembreResponse>;
 
 public class GetMembreByIdQueryHandler(ILogger<GetMembreByIdQueryHandler> logger,
     IMembreRepository membreRepository) : IQueryHandler<GetMembreByIdQuery, GetMembreResponse>
