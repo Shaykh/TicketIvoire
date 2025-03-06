@@ -15,6 +15,10 @@ public class Lieu : EntityBase, IAggregateRoot
     public uint? Capacite { get; set; }
     public LieuCoordonneesGeographiques? CoordonneesGeographiques { get; set; }
 
+    public Lieu()
+    {
+    }
+
     [SetsRequiredMembers]
     private Lieu(string nom, string description, string adresse, string ville, uint? capacite)
     {

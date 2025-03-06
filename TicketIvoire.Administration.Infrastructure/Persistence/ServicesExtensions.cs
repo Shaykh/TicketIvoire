@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TicketIvoire.Administration.Domain.LieuEvenements;
 using TicketIvoire.Administration.Domain.Membres;
 using TicketIvoire.Administration.Domain.PropositionEvenements;
+using TicketIvoire.Administration.Infrastructure.Persistence.LieuEvenements;
 using TicketIvoire.Administration.Infrastructure.Persistence.Membres;
 using TicketIvoire.Administration.Infrastructure.Persistence.PropositionEvenements;
 using TicketIvoire.Shared.Infrastructure.Persistence;
@@ -23,5 +25,6 @@ public static class ServicesExtensions
     {
         services.AddScoped<IMembreRepository, MembreRepository>();
         services.AddScoped<IPropositionEvenementRepository, PropositionEvenementRepository>();
+        services.AddScoped<ILieuRepository, LieuRepository>();
     }
 }
