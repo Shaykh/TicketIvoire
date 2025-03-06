@@ -1,12 +1,42 @@
-﻿using TicketIvoire.Administration.Domain.Membres;
+﻿using Microsoft.EntityFrameworkCore;
+using TicketIvoire.Administration.Domain.Membres;
+using TicketIvoire.Shared.Infrastructure.Persistence;
 
 namespace TicketIvoire.Administration.Infrastructure.Persistence.Membres;
 
-public class MembreRepository : IMembreRepository
+public class MembreRepository(AdministrationDbContext dbContext) : IMembreRepository
 {
-    public Task<IEnumerable<Membre>> GetAllAsync(uint? pageNumber, uint? numberByPage) => throw new NotImplementedException();
-    public Task<IEnumerable<Membre>> GetAllByStatutAdhesionAsync(StatutAdhesion statutAdhesion, uint? pageNumber, uint? numberByPage) => throw new NotImplementedException();
-    public Task<int> GetAllCountAsync() => throw new NotImplementedException();
-    public Task<Membre> GetByIdAsync(MembreId id) => throw new NotImplementedException();
-    public Task<int> GetCountByStatutAdhesionAsync(StatutAdhesion statutAdhesion) => throw new NotImplementedException();
+    private readonly DbSet<MembreEntity> _membres = dbContext.Membres;
+
+    public async Task<IEnumerable<Membre>> GetAllAsync(uint? pageNumber, uint? numberByPage) 
+        => await _membres
+            .AsNoTracking()
+            .ToPaging(pageNumber, numberByPage)
+            .Select(m => m.ToDomain())
+            .ToListAsync();
+
+    public async Task<IEnumerable<Membre>> GetAllByStatutAdhesionAsync(StatutAdhesion statutAdhesion, uint? pageNumber, uint? numberByPage) 
+        => await _membres
+            .AsNoTracking()
+            .Where(m => m.StatutAdhesion == statutAdhesion)
+            .ToPaging(pageNumber, numberByPage)
+            .Select(m => m.ToDomain())
+            .ToListAsync();
+
+    public async Task<int> GetAllCountAsync() 
+        => await _membres
+            .CountAsync();
+
+    public async Task<Membre> GetByIdAsync(MembreId id)
+    {
+        MembreEntity membre = await _membres
+            .AsNoTracking()
+            .FirstOrDefaultAsync(m => m.Id == id.Value) ??
+            throw new DataAccessException($"Le membre d'identifiant {id.Value} n'a pas été trouvé");
+        return membre.ToDomain();
+    }
+
+    public async Task<int> GetCountByStatutAdhesionAsync(StatutAdhesion statutAdhesion) 
+        => await _membres
+            .CountAsync(m => m.StatutAdhesion == statutAdhesion);
 }

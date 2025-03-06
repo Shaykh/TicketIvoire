@@ -18,6 +18,10 @@ public class Membre : EntityBase, IAggregateRoot
     public bool EstActif { get; set; }
     public StatutAdhesion StatutAdhesion { get; set; }
 
+    public Membre()
+    {
+    }
+
     [SetsRequiredMembers]
     private Membre(string login, string email, string nom, string prenom, string telephone, DateTime dateAdhesion)
     {
