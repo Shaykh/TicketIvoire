@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Persistence\LieuEvenements\" />
-    <Folder Include="Persistence\PropositionEvenements\" />
   </ItemGroup>
 
   <ItemGroup>

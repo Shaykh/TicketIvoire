@@ -18,6 +18,10 @@ public class PropositionEvenement : EntityBase, IAggregateRoot
     public PropositionDecision? PropositionDecision { get; set; }
     public required UtilisateurId UtilisateurId { get; set; }
 
+    public PropositionEvenement()
+    {
+    }
+
     [SetsRequiredMembers]
     private PropositionEvenement(UtilisateurId utilisateurId, string nom, string description, DateTime dateDebut, DateTime dateFin, PropositionLieu lieu)
     {
