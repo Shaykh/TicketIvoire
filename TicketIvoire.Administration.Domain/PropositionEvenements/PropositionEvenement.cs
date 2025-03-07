@@ -52,14 +52,14 @@ public class PropositionEvenement : EntityBase, IAggregateRoot
 
     public void Accepter(UtilisateurId utilisateurId, DateTime dateDecision)
     {
-        PropositionDecision = new (utilisateurId, dateDecision, PropositionDecision.AccepterCode, null);
+        PropositionDecision = PropositionDecision.PropositionAcceptee(utilisateurId.Value, dateDecision);
         RegisterEvent(new PropositionEvenementAccepteeEvent(Id.Value, utilisateurId.Value, dateDecision));
     }
 
     public void Refuser(UtilisateurId utilisateurId, DateTime dateDecision, string raisons)
     {
         CheckRule(new PropositionRefusMustHaveRaisonsRule(raisons));
-        PropositionDecision = new(utilisateurId, dateDecision, PropositionDecision.RefuserCode, raisons);
+        PropositionDecision = PropositionDecision.PropositionRefusee(utilisateurId.Value, dateDecision, raisons);
         RegisterEvent(new PropositionEvenementRefuseeEvent(Id.Value, utilisateurId.Value, dateDecision, raisons));
     }
 

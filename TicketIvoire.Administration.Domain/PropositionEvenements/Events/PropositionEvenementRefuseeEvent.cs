@@ -2,6 +2,6 @@
 
 namespace TicketIvoire.Administration.Domain.PropositionEvenements.Events;
 
-public record PropositionEvenementRefuseeEvent(Guid PropositionEvenement, Guid UtilisateurId, DateTime DateDecision, string Raisons) : DomainEventBase
+public record PropositionEvenementRefuseeEvent(Guid PropositionEvenementId, Guid UtilisateurId, DateTime DateDecision, string Raisons) : DomainEventBase
 {
 }

@@ -1,22 +1,21 @@
 ﻿using TicketIvoire.Administration.Domain.PropositionEvenements;
+using TicketIvoire.Administration.Domain.PropositionEvenements.Events;
 using TicketIvoire.Administration.Domain.Utilisateurs;
 
 namespace TicketIvoire.Administration.Infrastructure.Persistence.PropositionEvenements;
 
 public static class Mapping
 {
-    public static PropositionEvenementEntity ToEntity(this PropositionEvenement propositionEvenement) 
+    public static PropositionEvenementEntity ToEntity(this PropositionEvenementCreeEvent propositionEvenement) 
         => new()
         { 
             DateDebut = propositionEvenement.DateDebut,
             DateFin = propositionEvenement.DateFin, 
-            Decision = propositionEvenement.PropositionDecision, 
             Description = propositionEvenement.Description, 
-            Id = propositionEvenement.Id.Value, 
+            Id = propositionEvenement.Id, 
             Lieu = propositionEvenement.Lieu, 
             Nom = propositionEvenement.Nom, 
-            PropositionStatut = propositionEvenement.PropositionStatut, 
-            UtilisateurId = propositionEvenement.UtilisateurId.Value 
+            UtilisateurId = propositionEvenement.UtilisateurId 
         };
 
     public static PropositionEvenement ToDomain(this PropositionEvenementEntity propositionEntity)
