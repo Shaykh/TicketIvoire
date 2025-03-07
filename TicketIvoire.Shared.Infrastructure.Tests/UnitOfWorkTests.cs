@@ -4,7 +4,6 @@ using TicketIvoire.Shared.Infrastructure.Persistence;
 
 namespace TicketIvoire.Shared.Infrastructure.Tests;
 
-#pragma warning disable CA1707
 public class UnitOfWorkTests
 {
     [Fact]
@@ -26,4 +25,3 @@ public class UnitOfWorkTests
         domainEventsContainerMock.Verify(d => d.ClearEvents(), Times.Once);
     }
 }
-#pragma warning restore CA1707

@@ -5,7 +5,7 @@ namespace TicketIvoire.Shared.Domain.BusinessRules;
 public class TelephoneMustBeValidRule(string telephone) : IBusinessRule
 {
     public string Message => $"Le numéro de téléphone {telephone} ne respecte le format de numérotation de la Côte d'Ivoire";
-    private const string TelephonePattern = @"^(0(1|5|7|21|22|23|24|25|26|27)\d{7}|\+225(1|5|7|21|22|23|24|25|26|27)\d{7})$";
+    private const string TelephonePattern = @"^(?:\+225|00225)?[0-9]{10}$";
 
     public bool Validate()
     {

@@ -2,4 +2,4 @@
 
 namespace TicketIvoire.Administration.Domain.Membres;
 
-public record MembreId(Guid Value) : TypeIdBase(Value);
+public record MembreId(Guid Value) : TypedIdBase(Value);

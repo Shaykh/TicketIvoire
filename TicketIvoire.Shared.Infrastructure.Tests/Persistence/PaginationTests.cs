@@ -2,7 +2,6 @@
 
 namespace TicketIvoire.Shared.Infrastructure.Tests.Persistence;
 
-#pragma warning disable CA1707 
 public class PaginationTests
 {
     private const int DefaultPageSize = 20;
@@ -114,4 +113,3 @@ public class PaginationTests
         Assert.Equal(40, result.Last());
     }
 }
-#pragma warning restore CA1707 

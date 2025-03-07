@@ -30,4 +30,12 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\Cheick\Source\Repos\TicketIvoire\TicketIvoire.Shared.Application.Tests\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\Cheick\Source\Repos\TicketIvoire\TicketIvoire.Shared.Application.Tests\.editorconfig" />
+  </ItemGroup>
+
 </Project>

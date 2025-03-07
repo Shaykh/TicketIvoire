@@ -4,7 +4,6 @@ using TicketIvoire.Shared.Domain.Exceptions;
 
 namespace TicketIvoire.Shared.Domain.Tests;
 
-#pragma warning disable CA1707 
 public class EntityBaseTests
 {
     [Fact]
@@ -36,4 +35,3 @@ public class EntityBaseTests
         ruleMock.Verify(r => r.Validate(), Times.Once);
     }
 }
-#pragma warning restore CA1707 

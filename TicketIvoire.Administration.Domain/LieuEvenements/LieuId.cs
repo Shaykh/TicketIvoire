@@ -2,4 +2,4 @@
 
 namespace TicketIvoire.Administration.Domain.LieuEvenements;
 
-public record LieuId(Guid Value) : TypeIdBase(Value);
+public record LieuId(Guid Value) : TypedIdBase(Value);

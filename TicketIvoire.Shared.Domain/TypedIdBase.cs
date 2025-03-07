@@ -1,3 +1,3 @@
 ﻿namespace TicketIvoire.Shared.Domain;
 
-public record TypeIdBase(Guid Value);
+public record TypedIdBase(Guid Value);

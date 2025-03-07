@@ -11,4 +11,5 @@ public class LieuEntity : AuditableEntity
     public required string Ville { get; set; }
     public uint? Capacite { get; set; }
     public LieuCoordonneesGeographiques? CoordonneesGeographiques { get; set; }
+    public string? RaisonsRetrait { get; set; }
 }

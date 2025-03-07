@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using TicketIvoire.Administration.Domain.LieuEvenements.Events;
 using TicketIvoire.Administration.Domain.LieuEvenements.Rules;
+using TicketIvoire.Administration.Domain.Utilisateurs;
 using TicketIvoire.Shared.Domain;
 
 namespace TicketIvoire.Administration.Domain.LieuEvenements;
@@ -56,9 +57,9 @@ public class Lieu : EntityBase, IAggregateRoot
         RegisterEvent(new LieuCoordonneesGeographiquesDefiniesEvent(Id.Value, CoordonneesGeographiques.Latitude, CoordonneesGeographiques.Longitude));
     }
 
-    public void Supprimer(string raisons)
+    public void Supprimer(string raisons, UtilisateurId utilisateurId)
     {
         CheckRule(new SuppressionRaisonsMustBeValidRule(raisons));
-        RegisterEvent(new LieuRetireEvent(Id.Value, raisons));
+        RegisterEvent(new LieuRetireEvent(Id.Value, raisons, utilisateurId.Value));
     }
 }

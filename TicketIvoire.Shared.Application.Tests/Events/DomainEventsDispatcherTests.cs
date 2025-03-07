@@ -5,9 +5,6 @@ using TicketIvoire.Shared.Domain.Events;
 
 namespace TicketIvoire.Shared.Application.Tests.Events;
 
-#pragma warning disable CA1707
-#pragma warning disable CA1515
-#pragma warning disable CA1034
 public class DomainEventsDispatcherTests
 {
     [Fact]
@@ -199,6 +196,3 @@ public class DomainEventsDispatcherTests
         public bool IsTransactional() => true;
     }
 }
-#pragma warning restore CA1707
-#pragma warning restore CA1515 
-#pragma warning restore CA1034

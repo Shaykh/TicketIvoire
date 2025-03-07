@@ -1,9 +1,19 @@
-﻿using TicketIvoire.Administration.Domain.LieuEvenements.Events;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using TicketIvoire.Administration.Domain.LieuEvenements.Events;
 using TicketIvoire.Shared.Infrastructure.Persistence;
 
 namespace TicketIvoire.Administration.Infrastructure.Persistence.LieuEvenements.EventHandlers;
 
-public class LieuRetireEventHandler : PersisterEventHandler<LieuRetireEvent>
+public class LieuRetireEventHandler(ILogger<LieuAjouteEventHandler> logger, AdministrationDbContext dbContext) : PersisterEventHandler<LieuRetireEvent>
 {
-    public override Task HandleAsync(LieuRetireEvent tEvent, CancellationToken cancellationToken) => throw new NotImplementedException();
+    public override async Task HandleAsync(LieuRetireEvent lieuEvent, CancellationToken cancellationToken)
+    {
+        logger.LogInformation("Persistence retrait lieu {LieuId}", lieuEvent.LieuId);
+        LieuEntity entityToDelete = await dbContext.Lieux.SingleOrDefaultAsync(l => l.Id == lieuEvent.LieuId, cancellationToken)
+            ?? throw new DataAccessException($"Aucun lieu avec l'identifiant {lieuEvent.LieuId} n'a été trouvé");
+        entityToDelete.RaisonsRetrait = lieuEvent.Raisons;
+        entityToDelete.Delete(lieuEvent.UtilisateurId);
+        logger.LogInformation("Fin Persistence retrait lieu {LieuId}", lieuEvent.LieuId);
+    }
 }

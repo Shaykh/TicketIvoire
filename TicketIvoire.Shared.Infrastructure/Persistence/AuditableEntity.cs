@@ -32,5 +32,4 @@ public class AuditableEntity
         UpdatedAt = DateTime.UtcNow;
         UpdatedBy = updatedBy;
     }
-
 }

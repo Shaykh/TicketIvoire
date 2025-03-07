@@ -3,7 +3,6 @@ using TicketIvoire.Shared.Infrastructure.Configuration;
 using TicketIvoire.Shared.Infrastructure.Messaging;
 
 namespace TicketIvoire.Shared.Infrastructure.Tests.Messaging;
-#pragma warning disable CA1707 
 public class MassTransitConfiguratorTests
 {
     [Fact]
@@ -32,4 +31,3 @@ public class MassTransitConfiguratorTests
         Assert.Equal(5672, result.Port);
     }
 }
-#pragma warning restore CA1707

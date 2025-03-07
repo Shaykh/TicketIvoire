@@ -2,4 +2,4 @@
 
 namespace TicketIvoire.Administration.Domain.LieuEvenements.Events;
 
-public record LieuRetireEvent(Guid LieuId, string Raisons) : DomainEventBase;
+public record LieuRetireEvent(Guid LieuId, string Raisons, Guid UtilisateurId) : DomainEventBase;

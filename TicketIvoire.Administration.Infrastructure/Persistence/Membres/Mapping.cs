@@ -1,12 +1,13 @@
 ﻿using TicketIvoire.Administration.Domain.Membres;
+using TicketIvoire.Administration.Domain.Membres.Events;
 
 namespace TicketIvoire.Administration.Infrastructure.Persistence.Membres;
 
 public static class Mapping
 {
-    public static MembreEntity ToEntity(this Membre membre) => new()
+    public static MembreEntity ToEntity(this MembreCreeEvent membre) => new()
     {
-        Id = membre.Id.Value,
+        Id = membre.Id,
         Nom = membre.Nom,
         Prenom = membre.Prenom,
         Email = membre.Email,

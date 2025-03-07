@@ -3,7 +3,6 @@ using TicketIvoire.Shared.Domain;
 
 namespace TicketIvoire.Shared.Infrastructure.Tests;
 
-#pragma warning disable CA1707
 public class ServicesExtensionsTests
 {
     [Fact]
@@ -19,4 +18,3 @@ public class ServicesExtensionsTests
         Assert.Contains(services, s => s.ServiceType == typeof(IUnitOfWork) && s.ImplementationType == typeof(UnitOfWork) && s.Lifetime == ServiceLifetime.Scoped);
     }
 }
-#pragma warning restore CA1707

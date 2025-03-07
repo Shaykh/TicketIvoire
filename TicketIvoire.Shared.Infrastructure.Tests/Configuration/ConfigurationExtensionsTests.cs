@@ -3,7 +3,6 @@ using TicketIvoire.Shared.Infrastructure.Configuration;
 
 namespace TicketIvoire.Shared.Infrastructure.Tests.Configuration;
 
-#pragma warning disable CA1707
 public class ConfigurationExtensionsTests
 {
     [Fact]
@@ -32,4 +31,3 @@ public class ConfigurationExtensionsTests
         Assert.Equal(5672, result.Port);
     }
 }
-#pragma warning restore CA1707

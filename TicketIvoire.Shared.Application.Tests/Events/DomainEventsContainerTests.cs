@@ -4,7 +4,6 @@ using TicketIvoire.Shared.Domain.Events;
 
 namespace TicketIvoire.Shared.Application.Tests.Events;
 
-#pragma warning disable CA1707
 public class DomainEventsContainerTests
 {
     [Fact]
@@ -50,4 +49,3 @@ public class DomainEventsContainerTests
         Assert.Empty(sut.DomainEvents);
     }
 }
-#pragma warning restore CA1707
