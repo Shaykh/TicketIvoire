@@ -12,5 +12,5 @@ public class MembreEntity : AuditableEntity
     public required string Telephone { get; set; }
     public required DateTime DateAdhesion { get; set; }
     public bool EstActif { get; set; }
-    public StatutAdhesion StatutAdhesion { get; set; }
+    public StatutAdhesion StatutAdhesion { get; set; } = StatutAdhesion.EnAttente;
 }
