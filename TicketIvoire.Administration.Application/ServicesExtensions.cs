@@ -5,7 +5,7 @@ namespace TicketIvoire.Administration.Application;
 
 public static class ServicesExtensions
 {
-    public static ServiceCollection AddAdministrationApplication(this ServiceCollection services)
+    public static IServiceCollection AddAdministrationApplication(this IServiceCollection services)
     {
         services.AddSharedApplication();
         services.AddMediatR(configuration => configuration.RegisterServicesFromAssemblies(typeof(ServicesExtensions).Assembly));

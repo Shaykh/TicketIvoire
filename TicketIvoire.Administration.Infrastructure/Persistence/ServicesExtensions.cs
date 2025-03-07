@@ -16,7 +16,7 @@ namespace TicketIvoire.Administration.Infrastructure.Persistence;
 
 public static class ServicesExtensions
 {
-    public static IServiceCollection AddAdministrationPersistence(this IServiceCollection services, IConfiguration configuration)
+    internal static IServiceCollection AddAdministrationPersistence(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<AdministrationDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("AdministrationDb")));
         services.AddScoped<IDbUnitOfWork, AdministrationDbContext>();
