@@ -5,6 +5,21 @@ namespace TicketIvoire.Shared.Domain.Tests.BusinessRules;
 public class IdMustBeValidRuleTests
 {
     [Fact]
+    public void GivenMessage_WhenCalled_ThenReturnCorrectText()
+    {
+        // Arrange
+        var value = Guid.NewGuid();
+        var rule = new IdMustBeValidRule(value);
+        var expected = $"L'identifiant {value} n'est pas valide";
+
+        // Act
+        var result = rule.Message;
+
+        // Assert
+        Assert.Equal(expected, result);
+    }
+
+    [Fact]
     public void GivenValidate_WhenInvalidId_ThenReturnFalse()
     {
         // Arrange

@@ -4,6 +4,21 @@ namespace TicketIvoire.Shared.Domain.Tests.BusinessRules;
 
 public class EmailMustBeValidRuleTests
 {
+    [Fact]
+    public void GivenMessage_WhenCalled_ThenReturnCorrectText()
+    {
+        // Arrange
+        var email = "test@example.com";
+        var rule = new EmailMustBeValidRule(email);
+        var expected = $"L'email {email} n'est pas valide";
+
+        // Act
+        var result = rule.Message;
+
+        // Assert
+        Assert.Equal(expected, result);
+    }
+
     [Theory]
     [InlineData("invalid-email")]
     [InlineData("")]

@@ -4,6 +4,22 @@ namespace TicketIvoire.Shared.Domain.Tests.BusinessRules;
 
 public class TelephoneMustBeValidRuleTests
 {
+
+    [Fact]
+    public void GivenMessage_WhenCalled_ThenReturnCorrectText()
+    {
+        // Arrange
+        var telephone = "0123456789";
+        var rule = new TelephoneMustBeValidRule(telephone);
+        var expected = $"Le numéro de téléphone {telephone} ne respecte le format de numérotation de la Côte d'Ivoire";
+
+        // Act
+        var result = rule.Message;
+
+        // Assert
+        Assert.Equal(expected, result);
+    }
+
     [Theory]
     [InlineData("A123456789")]
     [InlineData("123456789")]
