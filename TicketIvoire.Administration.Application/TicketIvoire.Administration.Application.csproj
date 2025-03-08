@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Moq" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TicketIvoire.Administration.Domain\TicketIvoire.Administration.Domain.csproj" />
     <ProjectReference Include="..\TicketIvoire.Shared.Application\TicketIvoire.Shared.Application.csproj" />
   </ItemGroup>
