@@ -23,13 +23,21 @@ public class PropositionEvenementRepository(AdministrationDbContext dbContext) :
             .Select(e => e.ToDomain())
             .ToListAsync();
 
-    public async Task<IEnumerable<PropositionEvenement>> GetAllByDecisionAsync(PropositionDecision decision, uint? pageNumber, uint? numberByPage) 
+    public async Task<IEnumerable<PropositionEvenement>> GetAllByDecisionCodeAsync(string decisionCode, uint? pageNumber, uint? numberByPage) 
         => await _dbSet
             .AsNoTracking()
-            .Where(e => e.Decision == decision)
+            .Where(e => e.Decision != null && e.Decision.Code == decisionCode)
             .ToPaging(pageNumber, numberByPage)
             .Select(e => e.ToDomain())
             .ToListAsync();
+
+    public async Task<IEnumerable<PropositionEvenement>> GetAllEnAttenteDeDecisionCodeAsync(uint? pageNumber, uint? numberByPage) 
+        => await _dbSet
+                .AsNoTracking()
+                .Where(e => e.Decision == null)
+                .ToPaging(pageNumber, numberByPage)
+                .Select(e => e.ToDomain())
+                .ToListAsync();
 
     public async Task<IEnumerable<PropositionEvenement>> GetAllByLieuId(Guid LieuId) 
         => await _dbSet
@@ -57,13 +65,17 @@ public class PropositionEvenementRepository(AdministrationDbContext dbContext) :
         => await _dbSet
             .CountAsync();
 
-    public async Task<int> GetAllCountByDecisionAsync(PropositionDecision decision)
+    public async Task<int> GetAllCountByDecisionCodeAsync(string decisionCode)
         => await _dbSet
-            .CountAsync(e => e.Decision == decision);
+            .CountAsync(e => e.Decision != null && e.Decision.Code == decisionCode);
 
     public async Task<int> GetAllCountByStatutAsync(PropositionStatut statut) 
         => await _dbSet
             .CountAsync(e => e.PropositionStatut == statut);
+
+    public async Task<int> GetAllCountEnAttenteDecisionAsync() 
+        => await _dbSet
+        .CountAsync(e => e.Decision == null);
 
     public async Task<PropositionEvenement> GetByIdAsync(PropositionEvenementId id)
     {

@@ -7,11 +7,13 @@ public interface IPropositionEvenementRepository
     Task<PropositionEvenement> GetByIdAsync(PropositionEvenementId id);
     Task<IEnumerable<PropositionEvenement>> GetAllAsync(uint? pageNumber, uint? numberByPage);
     Task<IEnumerable<PropositionEvenement>> GetAllByStatutAsync(PropositionStatut statut, uint? pageNumber, uint? numberByPage);
-    Task<IEnumerable<PropositionEvenement>> GetAllByDecisionAsync(PropositionDecision decision, uint? pageNumber, uint? numberByPage);
+    Task<IEnumerable<PropositionEvenement>> GetAllByDecisionCodeAsync(string decisionCode, uint? pageNumber, uint? numberByPage);
+    Task<IEnumerable<PropositionEvenement>> GetAllEnAttenteDeDecisionCodeAsync(uint? pageNumber, uint? numberByPage);
     Task<IEnumerable<PropositionEvenement>> GetAllByUtilisateurIdAsync(UtilisateurId utilisateurId);
     Task<IEnumerable<PropositionEvenement>> GetAllByDateRangeAsync(DateTime dateDebut, DateTime dateFin);
     Task<IEnumerable<PropositionEvenement>> GetAllByLieuId(Guid LieuId);
     Task<int> GetAllCountAsync();
     Task<int> GetAllCountByStatutAsync(PropositionStatut statut);
-    Task<int> GetAllCountByDecisionAsync(PropositionDecision decision);
+    Task<int> GetAllCountByDecisionCodeAsync(string decisionCode);
+    Task<int> GetAllCountEnAttenteDecisionAsync();
 }

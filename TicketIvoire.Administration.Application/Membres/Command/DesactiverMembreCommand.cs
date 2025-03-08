@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using FluentValidation;
+using Microsoft.Extensions.Logging;
 using TicketIvoire.Administration.Domain.Membres;
 using TicketIvoire.Shared.Application.Commands;
 using TicketIvoire.Shared.Domain;
@@ -8,13 +9,26 @@ namespace TicketIvoire.Administration.Application.Membres.Command;
 
 public record DesactiverMembreCommand(Guid MembreId, string Raisons) : ICommand;
 
+public class DesactiverMembreCommandValidator : AbstractValidator<DesactiverMembreCommand>
+{
+    public DesactiverMembreCommandValidator()
+    {
+        RuleFor(cmd => cmd.MembreId)
+            .NotEmpty();
+        RuleFor(cmd => cmd.Raisons)
+            .NotEmpty();
+    }
+}
+
 public class DesactiverMembreCommandHandler(ILogger<DesactiverMembreCommandHandler> logger,
+    IValidator<DesactiverMembreCommand> validator,
     IMembreRepository membreRepository,
     IDomainEventsContainer domainEventsContainer,
     IUnitOfWork unitOfWork) : ICommandHandler<DesactiverMembreCommand>
 {
     public async Task Handle(DesactiverMembreCommand request, CancellationToken cancellationToken)
     {
+        await validator.ValidateAndThrowAsync(request, cancellationToken);
         logger.LogInformation("Command Desactiver Membre {MembreId}", request.MembreId);
         Membre membre = await membreRepository.GetByIdAsync(new MembreId(request.MembreId));
         membre.Desactiver(request.Raisons);

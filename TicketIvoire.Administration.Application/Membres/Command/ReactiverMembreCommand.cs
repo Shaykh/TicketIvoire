@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using FluentValidation;
+using Microsoft.Extensions.Logging;
 using TicketIvoire.Administration.Domain.Membres;
 using TicketIvoire.Shared.Application.Commands;
 using TicketIvoire.Shared.Domain;
@@ -8,13 +9,26 @@ namespace TicketIvoire.Administration.Application.Membres.Command;
 
 public record ReactiverMembreCommand(Guid MembreId, string Raisons) : ICommand;
 
+public class ReactiverMembreCommandValidator : AbstractValidator<ReactiverMembreCommand>
+{
+    public ReactiverMembreCommandValidator()
+    {
+        RuleFor(cmd => cmd.MembreId)
+            .NotEmpty();
+        RuleFor(cmd => cmd.Raisons)
+            .NotEmpty();
+    }
+}
+
 public class ReactiverMembreCommandHandler(ILogger<ReactiverMembreCommandHandler> logger,
+    IValidator<ReactiverMembreCommand> validator,
     IMembreRepository membreRepository,
     IDomainEventsContainer domainEventsContainer,
     IUnitOfWork unitOfWork) : ICommandHandler<ReactiverMembreCommand>
 {
     public async Task Handle(ReactiverMembreCommand request, CancellationToken cancellationToken)
     {
+        await validator.ValidateAndThrowAsync(request, cancellationToken);
         logger.LogInformation("Command Reactiver Membre {MembreId}", request.MembreId);
         Membre membre = await membreRepository.GetByIdAsync(new MembreId(request.MembreId));
         membre.Reactiver(request.Raisons);

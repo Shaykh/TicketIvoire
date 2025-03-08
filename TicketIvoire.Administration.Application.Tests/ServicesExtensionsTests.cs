@@ -3,6 +3,8 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using TicketIvoire.Administration.Application.LieuEvenements.Command;
 using TicketIvoire.Administration.Application.LieuEvenements.Query;
+using TicketIvoire.Administration.Application.Membres.Command;
+using TicketIvoire.Administration.Application.Membres.Query;
 using TicketIvoire.Shared.Application.Events;
 using TicketIvoire.Shared.Domain.Events;
 
@@ -67,5 +69,36 @@ public class ServicesExtensionsTests
         Assert.Contains(services, s => s.ServiceType == typeof(IValidator<GetAllLieuxByVilleQuery>) && s.Lifetime == ServiceLifetime.Transient);
         Assert.Contains(services, s => s.ServiceType == typeof(IValidator<GetLieuByIdQuery>) && s.Lifetime == ServiceLifetime.Transient);
         Assert.Contains(services, s => s.ServiceType == typeof(IValidator<GetLieuxByCapaciteRangeQuery>) && s.Lifetime == ServiceLifetime.Transient);
+    }
+
+    [Fact]
+    public void GivenServiceCollection_WhenAddSharedApplication_ThenAddMembreCommandsValidators()
+    {
+        // Arrange
+        var services = new ServiceCollection();
+
+        // Act
+        services.AddAdministrationApplication();
+
+        // Assert
+        Assert.Contains(services, s => s.ServiceType == typeof(IValidator<AjouterMembreCommand>) && s.Lifetime == ServiceLifetime.Transient);
+        Assert.Contains(services, s => s.ServiceType == typeof(IValidator<DesactiverMembreCommand>) && s.Lifetime == ServiceLifetime.Transient);
+        Assert.Contains(services, s => s.ServiceType == typeof(IValidator<ReactiverMembreCommand>) && s.Lifetime == ServiceLifetime.Transient);
+        Assert.Contains(services, s => s.ServiceType == typeof(IValidator<RefuserMembreCommand>) && s.Lifetime == ServiceLifetime.Transient);
+        Assert.Contains(services, s => s.ServiceType == typeof(IValidator<ValiderMembreCommand>) && s.Lifetime == ServiceLifetime.Transient);
+    }
+
+
+    [Fact]
+    public void GivenServiceCollection_WhenAddSharedApplication_ThenAddMembreQueriesValidators()
+    {
+        // Arrange
+        var services = new ServiceCollection();
+
+        // Act
+        services.AddAdministrationApplication();
+
+        // Assert
+        Assert.Contains(services, s => s.ServiceType == typeof(IValidator<GetMembreByIdQuery>) && s.Lifetime == ServiceLifetime.Transient);
     }
 }
