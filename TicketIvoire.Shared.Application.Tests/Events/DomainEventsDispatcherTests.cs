@@ -165,7 +165,7 @@ public class DomainEventsDispatcherTests
 
     public sealed record TestEvent : IDomainEvent
     {
-        public Guid Id => Guid.NewGuid();
+        public Guid EventId => Guid.NewGuid();
 
         public DateTime CreatedAt => DateTime.UtcNow;
     }

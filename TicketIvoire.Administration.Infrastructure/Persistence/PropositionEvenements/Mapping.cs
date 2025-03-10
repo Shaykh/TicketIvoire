@@ -12,7 +12,7 @@ public static class Mapping
             DateDebut = propositionEvenement.DateDebut,
             DateFin = propositionEvenement.DateFin, 
             Description = propositionEvenement.Description, 
-            Id = propositionEvenement.Id, 
+            Id = propositionEvenement.PropositionEvenementId, 
             Lieu = propositionEvenement.Lieu, 
             Nom = propositionEvenement.Nom, 
             UtilisateurId = propositionEvenement.UtilisateurId 

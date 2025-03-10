@@ -4,7 +4,7 @@ using TicketIvoire.Shared.Infrastructure.Persistence;
 
 namespace TicketIvoire.Administration.Infrastructure.Persistence.Membres.EventHandlers;
 
-public class MembreCreeEventHandler(ILogger<MembreCreeEvent> logger, AdministrationDbContext dbContext) : PersisterEventHandler<MembreCreeEvent>
+public class MembreCreeEventHandler(ILogger<MembreCreeEventHandler> logger, AdministrationDbContext dbContext) : PersisterEventHandler<MembreCreeEvent>
 {
     public override async Task HandleAsync(MembreCreeEvent membreEvent, CancellationToken cancellationToken)
     {

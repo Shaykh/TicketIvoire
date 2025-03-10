@@ -2,6 +2,6 @@
 
 public interface IEvent
 {
-    Guid Id { get; }
+    Guid EventId { get; }
     DateTime CreatedAt { get; }
 }
