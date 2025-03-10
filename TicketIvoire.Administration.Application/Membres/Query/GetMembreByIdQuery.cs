@@ -20,7 +20,7 @@ public class GetMembreByIdQueryHandler(ILogger<GetMembreByIdQueryHandler> logger
     {
         await validator.ValidateAndThrowAsync(query, cancellationToken);
         logger.LogInformation("Entree Query GetMembre By Id {Id}", query.Id);
-        Membre membre = await membreRepository.GetByIdAsync(new MembreId(query.Id));
+        Membre membre = await membreRepository.GetByIdAsync(new MembreId(query.Id), cancellationToken);
 
         GetMembreResponse response = membre.ToResponse();
         logger.LogInformation("Sortie Query GetMembre By Id {Response}", response);

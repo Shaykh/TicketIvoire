@@ -24,7 +24,7 @@ public class RefuserMembreCommandHandler(ILogger<RefuserMembreCommandHandler> lo
     {
         await validator.ValidateAndThrowAsync(command, cancellationToken);
         logger.LogInformation("Command Refuser Membre {MembreId}", command.MembreId);
-        Membre membre = await membreRepository.GetByIdAsync(new MembreId(command.MembreId));
+        Membre membre = await membreRepository.GetByIdAsync(new MembreId(command.MembreId), cancellationToken);
         membre.Refuser();
         domainEventsContainer.AddEvents(membre.DomainEvents);
         membre.ClearEvents();

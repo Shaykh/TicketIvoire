@@ -13,8 +13,8 @@ public class GetNombreMembresQueryHandler(ILogger<GetNombreMembresQueryHandler> 
     {
         logger.LogInformation("Entree Query GetNombre Membres statut adhesion: {StatutAdhesion}", query.StatutAdhesion);
         int count = query.StatutAdhesion is null ?
-            await membreRepository.GetAllCountAsync() :
-            await membreRepository.GetCountByStatutAdhesionAsync(query.StatutAdhesion.Value);
+            await membreRepository.GetAllCountAsync(cancellationToken) :
+            await membreRepository.GetCountByStatutAdhesionAsync(query.StatutAdhesion.Value, cancellationToken);
         logger.LogInformation("Sortie Query GetNombre Membres {Count} membres statut adhesion: {StatutAdhesion}", count, query.StatutAdhesion);
         return count;
     }

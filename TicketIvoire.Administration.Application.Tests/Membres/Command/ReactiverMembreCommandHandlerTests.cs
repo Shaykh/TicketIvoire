@@ -37,7 +37,7 @@ public class ReactiverMembreCommandHandlerTests
             Times.Never);
         unitOfWorkMock.Verify(u => u.CommitAsync(It.IsAny<CancellationToken>()), 
             Times.Never);
-        membreRepositoryMock.Verify(r => r.GetByIdAsync(It.IsAny<MembreId>()),
+        membreRepositoryMock.Verify(r => r.GetByIdAsync(It.IsAny<MembreId>(), It.IsAny<CancellationToken>()),
             Times.Never);
     }
 
@@ -48,7 +48,7 @@ public class ReactiverMembreCommandHandlerTests
         var command = new ReactiverMembreCommand(Guid.NewGuid(), "raisons");
         ReactiverMembreCommandHandler handler = MakeSut(out var membreRepositoryMock, out var domainEventsContainerMock, out var unitOfWorkMock);
         var membre = Membre.Create("login", "email@example.com", "Nom", "Prenom", "0123456789", DateTime.Now);
-        membreRepositoryMock.Setup(r => r.GetByIdAsync(It.IsAny<MembreId>()))
+        membreRepositoryMock.Setup(r => r.GetByIdAsync(new MembreId(command.MembreId), CancellationToken.None))
             .ReturnsAsync(membre);
 
         // Act
@@ -59,7 +59,7 @@ public class ReactiverMembreCommandHandlerTests
             Times.Once);
         unitOfWorkMock.Verify(u => u.CommitAsync(CancellationToken.None),
             Times.Once);
-        membreRepositoryMock.Verify(r => r.GetByIdAsync(new MembreId(command.MembreId)),
+        membreRepositoryMock.Verify(r => r.GetByIdAsync(new MembreId(command.MembreId), CancellationToken.None),
             Times.Once);
         Assert.Empty(membre.DomainEvents);
     }

@@ -30,7 +30,7 @@ public class ReactiverMembreCommandHandler(ILogger<ReactiverMembreCommandHandler
     {
         await validator.ValidateAndThrowAsync(request, cancellationToken);
         logger.LogInformation("Command Reactiver Membre {MembreId}", request.MembreId);
-        Membre membre = await membreRepository.GetByIdAsync(new MembreId(request.MembreId));
+        Membre membre = await membreRepository.GetByIdAsync(new MembreId(request.MembreId), cancellationToken);
         membre.Reactiver(request.Raisons);
         domainEventsContainer.AddEvents(membre.DomainEvents);
         membre.ClearEvents();

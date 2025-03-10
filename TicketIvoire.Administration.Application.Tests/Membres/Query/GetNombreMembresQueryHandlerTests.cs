@@ -19,7 +19,7 @@ public class GetNombreMembresQueryHandlerTests
         // Arrange
         var query = new GetNombreMembresQuery(null);
         var handler = MakeSut(out var membreRepositoryMock);
-        membreRepositoryMock.Setup(r => r.GetAllCountAsync())
+        membreRepositoryMock.Setup(r => r.GetAllCountAsync(CancellationToken.None))
             .ReturnsAsync(10);
 
         // Act
@@ -27,8 +27,8 @@ public class GetNombreMembresQueryHandlerTests
 
         // Assert
         Assert.Equal(10, result);
-        membreRepositoryMock.Verify(r => r.GetAllCountAsync(), Times.Once);
-        membreRepositoryMock.Verify(r => r.GetCountByStatutAdhesionAsync(It.IsAny<StatutAdhesion>()), Times.Never);
+        membreRepositoryMock.Verify(r => r.GetAllCountAsync(CancellationToken.None), Times.Once);
+        membreRepositoryMock.Verify(r => r.GetCountByStatutAdhesionAsync(It.IsAny<StatutAdhesion>(), It.IsAny<CancellationToken>()), Times.Never);
     }
 
     [Fact]
@@ -37,7 +37,7 @@ public class GetNombreMembresQueryHandlerTests
         // Arrange
         var query = new GetNombreMembresQuery(StatutAdhesion.EnAttente);
         var handler = MakeSut(out var membreRepositoryMock);
-        membreRepositoryMock.Setup(r => r.GetCountByStatutAdhesionAsync(StatutAdhesion.EnAttente))
+        membreRepositoryMock.Setup(r => r.GetCountByStatutAdhesionAsync(StatutAdhesion.EnAttente, CancellationToken.None))
             .ReturnsAsync(10);
 
         // Act
@@ -45,8 +45,8 @@ public class GetNombreMembresQueryHandlerTests
 
         // Assert
         Assert.Equal(10, result);
-        membreRepositoryMock.Verify(r => r.GetAllCountAsync(), Times.Never);
-        membreRepositoryMock.Verify(r => r.GetCountByStatutAdhesionAsync(StatutAdhesion.EnAttente), Times.Once);
+        membreRepositoryMock.Verify(r => r.GetAllCountAsync(It.IsAny<CancellationToken>()), Times.Never);
+        membreRepositoryMock.Verify(r => r.GetCountByStatutAdhesionAsync(StatutAdhesion.EnAttente, CancellationToken.None), Times.Once);
     }
 
     [Fact]
@@ -55,7 +55,7 @@ public class GetNombreMembresQueryHandlerTests
         // Arrange
         var query = new GetNombreMembresQuery(StatutAdhesion.Accepte);
         var handler = MakeSut(out var membreRepositoryMock);
-        membreRepositoryMock.Setup(r => r.GetCountByStatutAdhesionAsync(StatutAdhesion.Accepte))
+        membreRepositoryMock.Setup(r => r.GetCountByStatutAdhesionAsync(StatutAdhesion.Accepte, CancellationToken.None))
             .ReturnsAsync(10);
 
         // Act
@@ -63,8 +63,8 @@ public class GetNombreMembresQueryHandlerTests
 
         // Assert
         Assert.Equal(10, result);
-        membreRepositoryMock.Verify(r => r.GetAllCountAsync(), Times.Never);
-        membreRepositoryMock.Verify(r => r.GetCountByStatutAdhesionAsync(StatutAdhesion.Accepte), Times.Once);
+        membreRepositoryMock.Verify(r => r.GetAllCountAsync(It.IsAny<CancellationToken>()), Times.Never);
+        membreRepositoryMock.Verify(r => r.GetCountByStatutAdhesionAsync(StatutAdhesion.Accepte, CancellationToken.None), Times.Once);
     }
 
     [Fact]
@@ -73,7 +73,7 @@ public class GetNombreMembresQueryHandlerTests
         // Arrange
         var query = new GetNombreMembresQuery(StatutAdhesion.Refuse);
         var handler = MakeSut(out var membreRepositoryMock);
-        membreRepositoryMock.Setup(r => r.GetCountByStatutAdhesionAsync(StatutAdhesion.Refuse))
+        membreRepositoryMock.Setup(r => r.GetCountByStatutAdhesionAsync(StatutAdhesion.Refuse, CancellationToken.None))
             .ReturnsAsync(10);
 
         // Act
@@ -81,7 +81,7 @@ public class GetNombreMembresQueryHandlerTests
 
         // Assert
         Assert.Equal(10, result);
-        membreRepositoryMock.Verify(r => r.GetAllCountAsync(), Times.Never);
-        membreRepositoryMock.Verify(r => r.GetCountByStatutAdhesionAsync(StatutAdhesion.Refuse), Times.Once);
+        membreRepositoryMock.Verify(r => r.GetAllCountAsync(It.IsAny<CancellationToken>()), Times.Never);
+        membreRepositoryMock.Verify(r => r.GetCountByStatutAdhesionAsync(StatutAdhesion.Refuse, CancellationToken.None), Times.Once);
     }
 }

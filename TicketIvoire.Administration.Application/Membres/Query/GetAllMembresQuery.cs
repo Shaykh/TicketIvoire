@@ -13,8 +13,8 @@ public class GetAllQueryHandler(ILogger<GetAllQueryHandler> logger,
     {
         logger.LogInformation("Entree Query GetAll Membres page: {PageNumber}, number by page: {NumberByPage}, statut adhesion: {StatutAdhesion}", query.PageNumber, query.NumberByPage, query.StatutAdhesion);
         IEnumerable<Membre> membres = query.StatutAdhesion.HasValue ? 
-            await membreRepository.GetAllByStatutAdhesionAsync(query.StatutAdhesion.Value, query.PageNumber, query.NumberByPage) :
-            await membreRepository.GetAllAsync(query.PageNumber, query.NumberByPage);
+            await membreRepository.GetAllByStatutAdhesionAsync(query.StatutAdhesion.Value, query.PageNumber, query.NumberByPage, cancellationToken) :
+            await membreRepository.GetAllAsync(query.PageNumber, query.NumberByPage, cancellationToken);
 
         IEnumerable<GetMembreResponse> response = membres.Select(m => m.ToResponse());
         logger.LogInformation("Sortie Query GetAll {Count} Membres, statut adhesion: {StatutAdhesion}", response.Count(), query.StatutAdhesion);

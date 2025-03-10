@@ -24,7 +24,7 @@ public class ValiderMembreCommandHandler(ILogger<ValiderMembreCommandHandler> lo
     {
         await validator.ValidateAndThrowAsync(command, cancellationToken);
         logger.LogInformation("Command Valider Membre {MembreId}", command.MembreId);
-        Membre membre = await membreRepository.GetByIdAsync(new MembreId(command.MembreId));
+        Membre membre = await membreRepository.GetByIdAsync(new MembreId(command.MembreId), cancellationToken);
         membre.Valider();
         domainEventsContainer.AddEvents(membre.DomainEvents);
         membre.ClearEvents();

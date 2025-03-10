@@ -39,4 +39,8 @@
     <None Include="C:\Users\Cheick\Source\Repos\TicketIvoire\TicketIvoire.Administration.Infrastructure.Tests\.editorconfig" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Persistence\Membres\" />
+  </ItemGroup>
+
 </Project>

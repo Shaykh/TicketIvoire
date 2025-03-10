@@ -23,7 +23,7 @@ public class GetMembreByIdQueryHandlerTests
         var query = new GetMembreByIdQuery(Guid.NewGuid());
         var handler = MakeSut(out var membreRepositoryMock);
         var membre = Membre.Create("login", "email@example.com", "Nom", "Prenom", "0123456789", DateTime.Now);
-        membreRepositoryMock.Setup(r => r.GetByIdAsync(new MembreId(query.Id)))
+        membreRepositoryMock.Setup(r => r.GetByIdAsync(new MembreId(query.Id), CancellationToken.None))
             .ReturnsAsync(membre);
 
         // Act
@@ -36,7 +36,7 @@ public class GetMembreByIdQueryHandlerTests
         Assert.Equal(membre.Nom, result.Nom);
         Assert.Equal(membre.Prenom, result.Prenom);
         Assert.Equal(membre.Telephone, result.Telephone);
-        membreRepositoryMock.Verify(r => r.GetByIdAsync(new MembreId(query.Id)),
+        membreRepositoryMock.Verify(r => r.GetByIdAsync(new MembreId(query.Id), CancellationToken.None),
             Times.Once);
     }
 
@@ -52,7 +52,7 @@ public class GetMembreByIdQueryHandlerTests
 
         // Assert
         await Assert.ThrowsAsync<ValidationException>(act);
-        membreRepositoryMock.Verify(r => r.GetByIdAsync(It.IsAny<MembreId>()),
+        membreRepositoryMock.Verify(r => r.GetByIdAsync(It.IsAny<MembreId>(), It.IsAny<CancellationToken>()),
             Times.Never);
     }
 }

@@ -30,7 +30,7 @@ public class DesactiverMembreCommandHandler(ILogger<DesactiverMembreCommandHandl
     {
         await validator.ValidateAndThrowAsync(request, cancellationToken);
         logger.LogInformation("Command Desactiver Membre {MembreId}", request.MembreId);
-        Membre membre = await membreRepository.GetByIdAsync(new MembreId(request.MembreId));
+        Membre membre = await membreRepository.GetByIdAsync(new MembreId(request.MembreId), cancellationToken);
         membre.Desactiver(request.Raisons);
         domainEventsContainer.AddEvents(membre.DomainEvents);
         membre.ClearEvents();

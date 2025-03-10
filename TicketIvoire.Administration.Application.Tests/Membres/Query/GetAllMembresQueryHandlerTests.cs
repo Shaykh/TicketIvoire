@@ -24,7 +24,7 @@ public class GetAllMembresQueryHandlerTests
             Membre.Create("login1", "email1@example.com", "Nom1", "Prenom1", "0123456789", DateTime.Now),
             Membre.Create("login2", "email2@example.com", "Nom2", "Prenom2", "0123456789", DateTime.Now)
         };
-        membreRepositoryMock.Setup(r => r.GetAllAsync(query.PageNumber, query.NumberByPage))
+        membreRepositoryMock.Setup(r => r.GetAllAsync(query.PageNumber, query.NumberByPage, CancellationToken.None))
             .ReturnsAsync(membres);
 
         // Act
@@ -33,8 +33,9 @@ public class GetAllMembresQueryHandlerTests
         // Assert
         Assert.NotNull(result);
         Assert.Equal(2, result.Count());
-        membreRepositoryMock.Verify(r => r.GetAllAsync(query.PageNumber, query.NumberByPage), Times.Once);
-        membreRepositoryMock.Verify(r => r.GetAllByStatutAdhesionAsync(It.IsAny<StatutAdhesion>(), query.PageNumber, query.NumberByPage), Times.Never);
+        membreRepositoryMock.Verify(r => r.GetAllAsync(query.PageNumber, query.NumberByPage, CancellationToken.None), Times.Once);
+        membreRepositoryMock.Verify(r => r.GetAllByStatutAdhesionAsync(It.IsAny<StatutAdhesion>(), It.IsAny<uint?>(), It.IsAny<uint?>(), It.IsAny<CancellationToken>()), 
+            Times.Never);
     }
 
     [Fact]
@@ -48,7 +49,7 @@ public class GetAllMembresQueryHandlerTests
             Membre.Create("login1", "email1@example.com", "Nom1", "Prenom1", "0123456789", DateTime.Now),
             Membre.Create("login2", "email2@example.com", "Nom2", "Prenom2", "0123456789", DateTime.Now)
         };
-        membreRepositoryMock.Setup(r => r.GetAllByStatutAdhesionAsync(query.StatutAdhesion!.Value, query.PageNumber, query.NumberByPage))
+        membreRepositoryMock.Setup(r => r.GetAllByStatutAdhesionAsync(query.StatutAdhesion!.Value, query.PageNumber, query.NumberByPage, CancellationToken.None))
             .ReturnsAsync(membres);
 
         // Act
@@ -57,8 +58,9 @@ public class GetAllMembresQueryHandlerTests
         // Assert
         Assert.NotNull(result);
         Assert.Equal(2, result.Count());
-        membreRepositoryMock.Verify(r => r.GetAllAsync(It.IsAny<uint?>(), It.IsAny<uint?>()), Times.Never);
-        membreRepositoryMock.Verify(r => r.GetAllByStatutAdhesionAsync(query.StatutAdhesion!.Value, query.PageNumber, query.NumberByPage), Times.Once);
+        membreRepositoryMock.Verify(r => r.GetAllAsync(It.IsAny<uint?>(), It.IsAny<uint?>(), It.IsAny<CancellationToken>()), 
+            Times.Never);
+        membreRepositoryMock.Verify(r => r.GetAllByStatutAdhesionAsync(query.StatutAdhesion!.Value, query.PageNumber, query.NumberByPage, CancellationToken.None), Times.Once);
     }
 
     [Fact]
@@ -72,7 +74,7 @@ public class GetAllMembresQueryHandlerTests
             Membre.Create("login1", "email1@example.com", "Nom1", "Prenom1", "0123456789", DateTime.Now),
             Membre.Create("login2", "email2@example.com", "Nom2", "Prenom2", "0123456789", DateTime.Now)
         };
-        membreRepositoryMock.Setup(r => r.GetAllByStatutAdhesionAsync(query.StatutAdhesion!.Value, query.PageNumber, query.NumberByPage))
+        membreRepositoryMock.Setup(r => r.GetAllByStatutAdhesionAsync(query.StatutAdhesion!.Value, query.PageNumber, query.NumberByPage, CancellationToken.None))
             .ReturnsAsync(membres);
 
         // Act
@@ -81,8 +83,8 @@ public class GetAllMembresQueryHandlerTests
         // Assert
         Assert.NotNull(result);
         Assert.Equal(2, result.Count());
-        membreRepositoryMock.Verify(r => r.GetAllAsync(It.IsAny<uint?>(), It.IsAny<uint?>()), Times.Never);
-        membreRepositoryMock.Verify(r => r.GetAllByStatutAdhesionAsync(query.StatutAdhesion!.Value, query.PageNumber, query.NumberByPage), Times.Once);
+        membreRepositoryMock.Verify(r => r.GetAllAsync(It.IsAny<uint?>(), It.IsAny<uint?>(), It.IsAny<CancellationToken>()), Times.Never);
+        membreRepositoryMock.Verify(r => r.GetAllByStatutAdhesionAsync(query.StatutAdhesion!.Value, query.PageNumber, query.NumberByPage, CancellationToken.None), Times.Once);
     }
 
     [Fact]
@@ -96,7 +98,7 @@ public class GetAllMembresQueryHandlerTests
             Membre.Create("login1", "email1@example.com", "Nom1", "Prenom1", "0123456789", DateTime.Now),
             Membre.Create("login2", "email2@example.com", "Nom2", "Prenom2", "0123456789", DateTime.Now)
         };
-        membreRepositoryMock.Setup(r => r.GetAllByStatutAdhesionAsync(query.StatutAdhesion!.Value, query.PageNumber, query.NumberByPage))
+        membreRepositoryMock.Setup(r => r.GetAllByStatutAdhesionAsync(query.StatutAdhesion!.Value, query.PageNumber, query.NumberByPage, CancellationToken.None))
             .ReturnsAsync(membres);
 
         // Act
@@ -105,7 +107,7 @@ public class GetAllMembresQueryHandlerTests
         // Assert
         Assert.NotNull(result);
         Assert.Equal(2, result.Count());
-        membreRepositoryMock.Verify(r => r.GetAllAsync(It.IsAny<uint?>(), It.IsAny<uint?>()), Times.Never);
-        membreRepositoryMock.Verify(r => r.GetAllByStatutAdhesionAsync(query.StatutAdhesion!.Value, query.PageNumber, query.NumberByPage), Times.Once);
+        membreRepositoryMock.Verify(r => r.GetAllAsync(It.IsAny<uint?>(), It.IsAny<uint?>(), It.IsAny<CancellationToken>()), Times.Never);
+        membreRepositoryMock.Verify(r => r.GetAllByStatutAdhesionAsync(query.StatutAdhesion!.Value, query.PageNumber, query.NumberByPage, CancellationToken.None), Times.Once);
     }
 }
