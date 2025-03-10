@@ -23,6 +23,18 @@ public class AjouterPropositionEvenementCommandValidator : AbstractValidator<Ajo
             .NotEmpty();
         RuleFor(cmd => cmd)
             .Must(cmd => cmd.DateDebut < cmd.DateFin);
+        RuleFor(cmd => cmd.Lieu)
+            .Must(l => l.LieuEvenementId != Guid.Empty)
+            .When(cmd => cmd.Lieu.Description is null || cmd.Lieu.Nom is null || cmd.Lieu.Ville is null);
+        RuleFor(cmd => cmd.Lieu.Nom)
+            .NotEmpty()
+            .When(cmd => cmd.Lieu.LieuEvenementId == Guid.Empty);
+        RuleFor(cmd => cmd.Lieu.Description)
+            .NotEmpty()
+            .When(cmd => cmd.Lieu.LieuEvenementId == Guid.Empty);
+        RuleFor(cmd => cmd.Lieu.Ville)
+            .NotEmpty()
+            .When(cmd => cmd.Lieu.LieuEvenementId == Guid.Empty);
     }
 }
 

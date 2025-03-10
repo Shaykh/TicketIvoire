@@ -38,4 +38,9 @@
     <None Include="C:\Users\Cheick\Source\Repos\TicketIvoire\TicketIvoire.Administration.Application.Tests\.editorconfig" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="PropositionEvenements\Command\" />
+    <Folder Include="PropositionEvenements\Query\" />
+  </ItemGroup>
+
 </Project>

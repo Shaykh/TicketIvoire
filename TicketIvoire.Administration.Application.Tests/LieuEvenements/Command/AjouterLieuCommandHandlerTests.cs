@@ -54,7 +54,7 @@ public class AjouterLieuCommandHandlerTests
         Assert.NotEqual(Guid.Empty, result);
         domainEventsContainerMock.Verify(d => d.AddEvents(It.IsAny<IEnumerable<IDomainEvent>>()),
             Times.Once);
-        unitOfWorkMock.Verify(u => u.CommitAsync(It.IsAny<CancellationToken>()),
+        unitOfWorkMock.Verify(u => u.CommitAsync(CancellationToken.None),
             Times.Once);
     }
 }

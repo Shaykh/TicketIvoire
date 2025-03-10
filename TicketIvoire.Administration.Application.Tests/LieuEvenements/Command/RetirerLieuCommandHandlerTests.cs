@@ -98,9 +98,9 @@ public class RetirerLieuCommandHandlerTests
         // Assert
         domainEventsContainerMock.Verify(d => d.AddEvents(It.IsAny<IEnumerable<IDomainEvent>>()),
             Times.Once);
-        unitOfWorkMock.Verify(u => u.CommitAsync(It.IsAny<CancellationToken>()),
+        unitOfWorkMock.Verify(u => u.CommitAsync(CancellationToken.None),
             Times.Once);
-        lieuRepositoryMock.Verify(r => r.GetByIdAsync(It.IsAny<Guid>()),
+        lieuRepositoryMock.Verify(r => r.GetByIdAsync(command.LieuId),
             Times.Once);
         Assert.Empty(lieu.DomainEvents);
     }

@@ -39,6 +39,8 @@ public class GetLieuByIdQueryHandlerTests
         Assert.Equal(lieu.Adresse, result.Adresse);
         Assert.Equal(coordonneesGeo.Latitude, result.CoordonneesGeo!.Latitude);
         Assert.Equal(coordonneesGeo.Longitude, result.CoordonneesGeo!.Longitude);
+        lieuRepositoryMock.Verify(r => r.GetByIdAsync(query.Id),
+            Times.Once);
     }
 
     [Fact]

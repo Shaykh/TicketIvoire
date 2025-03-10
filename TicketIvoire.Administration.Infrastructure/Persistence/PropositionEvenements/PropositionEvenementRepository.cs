@@ -39,7 +39,7 @@ public class PropositionEvenementRepository(AdministrationDbContext dbContext) :
                 .Select(e => e.ToDomain())
                 .ToListAsync();
 
-    public async Task<IEnumerable<PropositionEvenement>> GetAllByLieuId(Guid LieuId) 
+    public async Task<IEnumerable<PropositionEvenement>> GetAllByLieuIdAsync(Guid LieuId) 
         => await _dbSet
             .AsNoTracking()
             .Where(e => e.Lieu.LieuEvenementId == LieuId)

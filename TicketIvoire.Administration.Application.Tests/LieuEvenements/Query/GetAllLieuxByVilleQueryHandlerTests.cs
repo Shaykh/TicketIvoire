@@ -38,6 +38,8 @@ public class GetAllLieuxByVilleQueryHandlerTests
         Assert.Equal(2, result.Count());
         Assert.Equal("nom1", result.First().Nom);
         Assert.Equal("nom2", result.Last().Nom);
+        lieuRepositoryMock.Verify(r => r.GetAllByVilleAsync(query.Ville),
+            Times.Once);
     }
 
     [Fact]

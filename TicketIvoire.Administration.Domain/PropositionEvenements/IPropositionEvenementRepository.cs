@@ -11,7 +11,7 @@ public interface IPropositionEvenementRepository
     Task<IEnumerable<PropositionEvenement>> GetAllEnAttenteDeDecisionCodeAsync(uint? pageNumber, uint? numberByPage);
     Task<IEnumerable<PropositionEvenement>> GetAllByUtilisateurIdAsync(UtilisateurId utilisateurId);
     Task<IEnumerable<PropositionEvenement>> GetAllByDateRangeAsync(DateTime dateDebut, DateTime dateFin);
-    Task<IEnumerable<PropositionEvenement>> GetAllByLieuId(Guid LieuId);
+    Task<IEnumerable<PropositionEvenement>> GetAllByLieuIdAsync(Guid LieuId);
     Task<int> GetAllCountAsync();
     Task<int> GetAllCountByStatutAsync(PropositionStatut statut);
     Task<int> GetAllCountByDecisionCodeAsync(string decisionCode);

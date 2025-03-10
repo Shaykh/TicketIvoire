@@ -23,6 +23,7 @@ public static class Mapping
         {
             StatutAdhesion.Accepte => "Accepté",
             StatutAdhesion.Refuse => "Refusé",
+            StatutAdhesion.EnAttente => "En attente",
             _ => throw new ArgumentOutOfRangeException(nameof(statutAdhesion), statutAdhesion, null)
         };
 }

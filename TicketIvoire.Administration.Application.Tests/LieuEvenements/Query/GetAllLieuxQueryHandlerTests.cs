@@ -5,7 +5,7 @@ using TicketIvoire.Administration.Domain.LieuEvenements;
 
 namespace TicketIvoire.Administration.Application.Tests.LieuEvenements.Query;
 
-public class GetAllLieuxQueryTests
+public class GetAllLieuxQueryHandlerTests
 {
     private static GetAllLieuxQueryHandler MakeSut(out Mock<ILieuRepository> lieuRepositoryMock)
     {
@@ -36,6 +36,7 @@ public class GetAllLieuxQueryTests
         Assert.Equal(2, result.Count());
         Assert.Equal("nom1", result.First().Nom);
         Assert.Equal("nom2", result.Last().Nom);
+        lieuRepositoryMock.Verify(r => r.GetAllAsync(query.PageNumber, query.NumberByPage),
+            Times.Once);
     }
-
 }

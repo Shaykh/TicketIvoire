@@ -38,6 +38,8 @@ public class GetLieuxByCapaciteRangeQueryHandlerTests
         Assert.Equal(2, result.Count());
         Assert.Equal("nom1", result.First().Nom);
         Assert.Equal("nom2", result.Last().Nom);
+        lieuRepositoryMock.Verify(r => r.GetAllByCapaciteRangeAsync(query.Minimum, query.Maximum),
+            Times.Once);
     }
 
     [Fact]
