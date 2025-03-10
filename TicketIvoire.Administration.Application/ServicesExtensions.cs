@@ -38,6 +38,7 @@ public static class ServicesExtensions
         services.AddTransient<IValidator<GetAllLieuxByVilleQuery>, GetAllLieuxByVilleQueryValidator>();
         services.AddTransient<IValidator<GetLieuByIdQuery>, GetLieuByIdQueryValidator>();
         services.AddTransient<IValidator<GetLieuxByCapaciteRangeQuery>, GetLieuxByCapaciteRangeQueryValidator>();
+        services.AddTransient<IValidator<GetNombreAllLieuxByVilleQuery>, GetNombreAllLieuxByVilleQueryValidator>();
     }
 
     private static void AddMembreCommandsValidators(this IServiceCollection services)

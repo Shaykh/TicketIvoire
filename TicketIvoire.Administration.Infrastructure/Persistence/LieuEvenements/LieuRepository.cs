@@ -42,4 +42,12 @@ public class LieuRepository(AdministrationDbContext dbContext) : ILieuRepository
 
         return entity.ToDomain();
     }
+
+    public async Task<int> GetCountAsync() 
+        => await _dbSet
+                    .CountAsync();
+
+    public async Task<int> GetCountByVilleAsync(string ville) 
+        => await _dbSet
+                    .CountAsync(l => l.Ville.Contains(ville));
 }

@@ -71,6 +71,7 @@ public class ServicesExtensionsTests
         Assert.Contains(services, s => s.ServiceType == typeof(IValidator<GetAllLieuxByVilleQuery>) && s.Lifetime == ServiceLifetime.Transient);
         Assert.Contains(services, s => s.ServiceType == typeof(IValidator<GetLieuByIdQuery>) && s.Lifetime == ServiceLifetime.Transient);
         Assert.Contains(services, s => s.ServiceType == typeof(IValidator<GetLieuxByCapaciteRangeQuery>) && s.Lifetime == ServiceLifetime.Transient);
+        Assert.Contains(services, s => s.ServiceType == typeof(IValidator<GetNombreAllLieuxByVilleQuery>) && s.Lifetime == ServiceLifetime.Transient);
     }
 
     [Fact]
