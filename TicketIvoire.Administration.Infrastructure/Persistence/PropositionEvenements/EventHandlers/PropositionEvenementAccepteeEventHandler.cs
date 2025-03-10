@@ -7,7 +7,7 @@ using TicketIvoire.Shared.Infrastructure.Persistence;
 
 namespace TicketIvoire.Administration.Infrastructure.Persistence.PropositionEvenements.EventHandlers;
 
-public class PropositionEvenementAccepteeEventHandler(ILogger<PropositionEvenementAccepteeEvent> logger, AdministrationDbContext dbContext) : PersisterEventHandler<PropositionEvenementAccepteeEvent>
+public class PropositionEvenementAccepteeEventHandler(ILogger<PropositionEvenementAccepteeEventHandler> logger, AdministrationDbContext dbContext) : PersisterEventHandler<PropositionEvenementAccepteeEvent>
 {
     public override async Task HandleAsync(PropositionEvenementAccepteeEvent propositionEvent, CancellationToken cancellationToken)
     {
