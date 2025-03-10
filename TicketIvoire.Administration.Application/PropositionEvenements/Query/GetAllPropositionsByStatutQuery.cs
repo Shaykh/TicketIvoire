@@ -12,7 +12,7 @@ public class GetAllPropositionsByStatutQueryHandler(ILogger<GetAllPropositionsBy
     public async Task<IEnumerable<PropositionEvenementResponse>> Handle(GetAllPropositionsByStatutQuery query, CancellationToken cancellationToken)
     {
         logger.LogInformation("Entree Query Get All Proposition Evenement By Statut: {Statut} PageNumber: {PageNumber} NumberByPage: {NumberByPage}", query.Statut, query.PageNumber, query.NumberByPage);
-        IEnumerable<PropositionEvenement> propositionEvenements = await propositionEvenementRepository.GetAllByStatutAsync(query.Statut, query.PageNumber, query.NumberByPage);
+        IEnumerable<PropositionEvenement> propositionEvenements = await propositionEvenementRepository.GetAllByStatutAsync(query.Statut, query.PageNumber, query.NumberByPage, cancellationToken);
         IEnumerable<PropositionEvenementResponse> response = propositionEvenements.Select(pe => pe.ToResponse());
         logger.LogInformation("Sortie Query Get All Proposition Evenement By Statut: {Statut}, Response: {Count}", query.Statut, response.Count());
         return response;

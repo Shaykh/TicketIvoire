@@ -21,7 +21,7 @@ public class GetAllPropositionsByUtilisateurIdQueryHandler(ILogger<GetAllProposi
     {
         await validator.ValidateAndThrowAsync(query, cancellationToken);
         logger.LogInformation("Entree Query Get All Proposition Evenement By UtilisateurId: {UtilisateurId}", query.UtilisateurId);
-        IEnumerable<PropositionEvenement> propositionEvenements = await propositionEvenementRepository.GetAllByUtilisateurIdAsync(new UtilisateurId(query.UtilisateurId));
+        IEnumerable<PropositionEvenement> propositionEvenements = await propositionEvenementRepository.GetAllByUtilisateurIdAsync(new UtilisateurId(query.UtilisateurId), cancellationToken);
         IEnumerable<PropositionEvenementResponse> response = propositionEvenements.Select(pe => pe.ToResponse());
         logger.LogInformation("Sortie Query Get All Proposition Evenement By UtilisateurId: {UtilisateurId}, Response: {Count}", query.UtilisateurId, response.Count());
         return response;

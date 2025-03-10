@@ -22,7 +22,7 @@ public class GetNombreAllPropositionsByDecisionQueryHandlerTests
         // Arrange
         var query = new GetNombreAllPropositionsByDecisionQuery("Accepter");
         var handler = MakeSut(out var propositionEvenementRepositoryMock);
-        propositionEvenementRepositoryMock.Setup(r => r.GetAllCountByDecisionCodeAsync(query.DecisionCode))
+        propositionEvenementRepositoryMock.Setup(r => r.GetAllCountByDecisionCodeAsync(query.DecisionCode, CancellationToken.None))
             .ReturnsAsync(10);
 
         // Act
@@ -30,7 +30,7 @@ public class GetNombreAllPropositionsByDecisionQueryHandlerTests
 
         // Assert
         Assert.Equal(10, result);
-        propositionEvenementRepositoryMock.Verify(r => r.GetAllCountByDecisionCodeAsync(query.DecisionCode),
+        propositionEvenementRepositoryMock.Verify(r => r.GetAllCountByDecisionCodeAsync(query.DecisionCode, CancellationToken.None),
             Times.Once);
     }
 
@@ -46,7 +46,7 @@ public class GetNombreAllPropositionsByDecisionQueryHandlerTests
 
         // Assert
         await Assert.ThrowsAsync<ValidationException>(act);
-        propositionEvenementRepositoryMock.Verify(r => r.GetAllCountByDecisionCodeAsync(It.IsAny<string>()),
+        propositionEvenementRepositoryMock.Verify(r => r.GetAllCountByDecisionCodeAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()),
             Times.Never);
     }
 }

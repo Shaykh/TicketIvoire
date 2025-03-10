@@ -20,7 +20,7 @@ public class GetPropositionEvenementByIdQueryHandler(ILogger<GetPropositionEvene
     {
         await validator.ValidateAndThrowAsync(query, cancellationToken);
         logger.LogInformation("Entree Query Get Proposition Evenement By Id: {Id}", query.Id);
-        PropositionEvenement propositionEvenement = await propositionEvenementRepository.GetByIdAsync(new PropositionEvenementId(query.Id));
+        PropositionEvenement propositionEvenement = await propositionEvenementRepository.GetByIdAsync(new PropositionEvenementId(query.Id), cancellationToken);
 
         PropositionEvenementResponse response = propositionEvenement.ToResponse();
         logger.LogInformation("Sortie Query Get Proposition Evenement By Id Response: {Response}", response);

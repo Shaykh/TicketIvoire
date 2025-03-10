@@ -31,7 +31,7 @@ public class AccepterPropositionEvenementCommandHandler(ILogger<AccepterProposit
     {
         await validator.ValidateAndThrowAsync(command, cancellationToken);
         logger.LogInformation("Command Accepter Proposition Evenement {PropositionEvenementId} by UtilisateurId : {UtilisateurId}", command.PropositionEvenementId, command.UtilisateurId);
-        PropositionEvenement propositionEvenement = await propositionEvenementRepository.GetByIdAsync(new PropositionEvenementId(command.PropositionEvenementId));
+        PropositionEvenement propositionEvenement = await propositionEvenementRepository.GetByIdAsync(new PropositionEvenementId(command.PropositionEvenementId), cancellationToken);
         propositionEvenement.Accepter(new UtilisateurId(command.UtilisateurId), command.DateDecision);
         domainEventsContainer.AddEvents(propositionEvenement.DomainEvents);
         propositionEvenement.ClearEvents();

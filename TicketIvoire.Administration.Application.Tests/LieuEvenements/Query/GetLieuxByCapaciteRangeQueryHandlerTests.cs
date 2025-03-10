@@ -27,7 +27,7 @@ public class GetLieuxByCapaciteRangeQueryHandlerTests
             Lieu.Create("nom1", "description1", "adresse1", "ville1", 200),
             Lieu.Create("nom2", "description2", "adresse2", "ville2", 300)
         };
-        lieuRepositoryMock.Setup(r => r.GetAllByCapaciteRangeAsync(query.Minimum, query.Maximum))
+        lieuRepositoryMock.Setup(r => r.GetAllByCapaciteRangeAsync(query.Minimum, query.Maximum, CancellationToken.None))
             .ReturnsAsync(lieux);
 
         // Act
@@ -38,7 +38,7 @@ public class GetLieuxByCapaciteRangeQueryHandlerTests
         Assert.Equal(2, result.Count());
         Assert.Equal("nom1", result.First().Nom);
         Assert.Equal("nom2", result.Last().Nom);
-        lieuRepositoryMock.Verify(r => r.GetAllByCapaciteRangeAsync(query.Minimum, query.Maximum),
+        lieuRepositoryMock.Verify(r => r.GetAllByCapaciteRangeAsync(query.Minimum, query.Maximum, CancellationToken.None),
             Times.Once);
     }
 
@@ -54,7 +54,7 @@ public class GetLieuxByCapaciteRangeQueryHandlerTests
 
         // Assert
         await Assert.ThrowsAsync<ValidationException>(act);
-        lieuRepositoryMock.Verify(r => r.GetAllByCapaciteRangeAsync(It.IsAny<uint?>(), It.IsAny<uint?>()),
+        lieuRepositoryMock.Verify(r => r.GetAllByCapaciteRangeAsync(It.IsAny<uint?>(), It.IsAny<uint?>(), It.IsAny<CancellationToken>()),
             Times.Never);
     }
 }

@@ -27,7 +27,7 @@ public class GetNombreAllPropositionsByDecisionQueryHandler(ILogger<GetNombreAll
     {
         await validator.ValidateAndThrowAsync(query, cancellationToken);
         logger.LogInformation("Entree Query GetNombre All Propositions By Decision: {Decision}", query.DecisionCode);
-        int count = await propositionEvenementRepository.GetAllCountByDecisionCodeAsync(query.DecisionCode);
+        int count = await propositionEvenementRepository.GetAllCountByDecisionCodeAsync(query.DecisionCode, cancellationToken);
         logger.LogInformation("Sortie Query GetNombre All Propositions By Decision {Count} propositions", count);
         return count;
     }

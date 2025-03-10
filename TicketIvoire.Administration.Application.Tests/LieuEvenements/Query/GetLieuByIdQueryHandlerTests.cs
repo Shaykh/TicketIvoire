@@ -25,7 +25,7 @@ public class GetLieuByIdQueryHandlerTests
         var lieu = Lieu.Create("nom", "description", "adresse", "ville", 455);
         var coordonneesGeo = new LieuCoordonneesGeographiques(-1.536m, -7.3654m);
         lieu.DefinirCoordonneesGeographiques(coordonneesGeo);
-        lieuRepositoryMock.Setup(r => r.GetByIdAsync(query.Id))
+        lieuRepositoryMock.Setup(r => r.GetByIdAsync(query.Id, CancellationToken.None))
             .ReturnsAsync(lieu);
 
         // Act
@@ -39,7 +39,7 @@ public class GetLieuByIdQueryHandlerTests
         Assert.Equal(lieu.Adresse, result.Adresse);
         Assert.Equal(coordonneesGeo.Latitude, result.CoordonneesGeo!.Latitude);
         Assert.Equal(coordonneesGeo.Longitude, result.CoordonneesGeo!.Longitude);
-        lieuRepositoryMock.Verify(r => r.GetByIdAsync(query.Id),
+        lieuRepositoryMock.Verify(r => r.GetByIdAsync(query.Id, CancellationToken.None),
             Times.Once);
     }
 
@@ -55,7 +55,7 @@ public class GetLieuByIdQueryHandlerTests
 
         // Assert
         await Assert.ThrowsAsync<ValidationException>(act);
-        lieuRepositoryMock.Verify(r => r.GetByIdAsync(It.IsAny<Guid>()),
+        lieuRepositoryMock.Verify(r => r.GetByIdAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()),
             Times.Never);
     }
 }

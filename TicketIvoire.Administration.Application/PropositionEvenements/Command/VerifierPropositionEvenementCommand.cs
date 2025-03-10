@@ -24,7 +24,7 @@ public class VerifierPropositionEvenementCommandHandler(ILogger<VerifierProposit
     {
         await validator.ValidateAndThrowAsync(command, cancellationToken);
         logger.LogInformation("Command Verifier Proposition Evenement {PropositionEvenementId}", command.PropositionEvenementId);
-        PropositionEvenement propositionEvenement = await propositionEvenementRepository.GetByIdAsync(new PropositionEvenementId(command.PropositionEvenementId));
+        PropositionEvenement propositionEvenement = await propositionEvenementRepository.GetByIdAsync(new PropositionEvenementId(command.PropositionEvenementId), cancellationToken);
         propositionEvenement.Verifier();
         domainEventsContainer.AddEvents(propositionEvenement.DomainEvents);
         propositionEvenement.ClearEvents();

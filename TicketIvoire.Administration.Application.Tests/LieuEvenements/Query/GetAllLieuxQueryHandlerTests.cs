@@ -25,7 +25,7 @@ public class GetAllLieuxQueryHandlerTests
             Lieu.Create("nom1", "description1", "adresse1", "ville1", 200),
             Lieu.Create("nom2", "description2", "adresse2", "ville2", 300)
         };
-        lieuRepositoryMock.Setup(r => r.GetAllAsync(1, 10))
+        lieuRepositoryMock.Setup(r => r.GetAllAsync(1, 10, CancellationToken.None))
             .ReturnsAsync(lieux);
 
         // Act
@@ -36,7 +36,7 @@ public class GetAllLieuxQueryHandlerTests
         Assert.Equal(2, result.Count());
         Assert.Equal("nom1", result.First().Nom);
         Assert.Equal("nom2", result.Last().Nom);
-        lieuRepositoryMock.Verify(r => r.GetAllAsync(query.PageNumber, query.NumberByPage),
+        lieuRepositoryMock.Verify(r => r.GetAllAsync(query.PageNumber, query.NumberByPage, CancellationToken.None),
             Times.Once);
     }
 }

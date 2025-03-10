@@ -49,17 +49,6 @@ internal sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> log
             };
         }
 
-        if (exception is DataAccessException dataNotFoundException)
-        {
-            statusCode = StatusCodes.Status404NotFound;
-            return new ProblemDetails
-            {
-                Status = statusCode,
-                Detail = dataNotFoundException.Message,
-                Title = "Entité non trouvée"
-            };
-        }
-
         if (exception is BadRequestException badRequestException)
         {
             statusCode = StatusCodes.Status400BadRequest;

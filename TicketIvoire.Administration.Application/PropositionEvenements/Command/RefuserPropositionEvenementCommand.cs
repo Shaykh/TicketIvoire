@@ -33,7 +33,7 @@ public class RefuserPropositionEvenementCommandHandler(ILogger<RefuserPropositio
     {
         await validator.ValidateAndThrowAsync(command, cancellationToken);
         logger.LogInformation("Command Refuser Proposition Evenement {PropositionEvenementId} by UtilisateurId : {UtilisateurId}", command.PropositionEvenementId, command.UtilisateurId);
-        PropositionEvenement propositionEvenement = await propositionEvenementRepository.GetByIdAsync(new PropositionEvenementId(command.PropositionEvenementId));
+        PropositionEvenement propositionEvenement = await propositionEvenementRepository.GetByIdAsync(new PropositionEvenementId(command.PropositionEvenementId), cancellationToken);
         propositionEvenement.Refuser(new UtilisateurId(command.UtilisateurId), command.DateDecision, command.Raisons);
         domainEventsContainer.AddEvents(propositionEvenement.DomainEvents);
         propositionEvenement.ClearEvents();

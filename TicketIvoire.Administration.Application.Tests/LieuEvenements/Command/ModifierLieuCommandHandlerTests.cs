@@ -42,7 +42,7 @@ public class ModifierLieuCommandHandlerTests
             Times.Never);
         unitOfWorkMock.Verify(u => u.CommitAsync(It.IsAny<CancellationToken>()), 
             Times.Never);
-        lieuRepositoryMock.Verify(r => r.GetByIdAsync(It.IsAny<Guid>()),
+        lieuRepositoryMock.Verify(r => r.GetByIdAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()),
             Times.Never);
     }
 
@@ -62,7 +62,7 @@ public class ModifierLieuCommandHandlerTests
             Times.Never);
         unitOfWorkMock.Verify(u => u.CommitAsync(It.IsAny<CancellationToken>()),
             Times.Never);
-        lieuRepositoryMock.Verify(r => r.GetByIdAsync(It.IsAny<Guid>()),
+        lieuRepositoryMock.Verify(r => r.GetByIdAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()),
             Times.Never);
     }
 
@@ -73,7 +73,7 @@ public class ModifierLieuCommandHandlerTests
         var command = new ModifierLieuCommand(Guid.NewGuid(), 44, "nom", "description", "adresse", "ville");
         ModifierLieuCommandHandler handler = MakeSut(out var lieuRepositoryMock, out var domainEventsContainerMock, out var unitOfWorkMock);
         var lieu = Lieu.Create("nom", "description", "adresse", "ville", 455);
-        lieuRepositoryMock.Setup(r => r.GetByIdAsync(command.LieuId))
+        lieuRepositoryMock.Setup(r => r.GetByIdAsync(command.LieuId, CancellationToken.None))
             .ReturnsAsync(lieu);
 
         // Act
@@ -84,7 +84,7 @@ public class ModifierLieuCommandHandlerTests
             Times.Once);
         unitOfWorkMock.Verify(u => u.CommitAsync(CancellationToken.None),
             Times.Once);
-        lieuRepositoryMock.Verify(r => r.GetByIdAsync(command.LieuId),
+        lieuRepositoryMock.Verify(r => r.GetByIdAsync(command.LieuId, CancellationToken.None),
             Times.Once);
         Assert.Empty(lieu.DomainEvents);
     }

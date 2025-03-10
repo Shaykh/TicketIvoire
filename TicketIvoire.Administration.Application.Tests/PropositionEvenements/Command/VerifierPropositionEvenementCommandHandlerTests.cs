@@ -39,7 +39,7 @@ public class VerifierPropositionEvenementCommandHandlerTests
             Times.Never);
         unitOfWorkMock.Verify(u => u.CommitAsync(It.IsAny<CancellationToken>()), 
             Times.Never);
-        propositionRepositoryMock.Verify(p => p.GetByIdAsync(It.IsAny<PropositionEvenementId>()),
+        propositionRepositoryMock.Verify(p => p.GetByIdAsync(It.IsAny<PropositionEvenementId>(), It.IsAny<CancellationToken>()),
             Times.Never);
     }
 
@@ -50,7 +50,7 @@ public class VerifierPropositionEvenementCommandHandlerTests
         var command = new VerifierPropositionEvenementCommand(Guid.NewGuid());
         VerifierPropositionEvenementCommandHandler handler = MakeSut(out var propositionRepositoryMock, out var domainEventsContainerMock, out var unitOfWorkMock);
         var proposition = PropositionEvenement.Create(new UtilisateurId(Guid.NewGuid()), "nom", "description", DateTime.Now.AddDays(-1), DateTime.Now, new PropositionLieu("Lieu1", "Adresse1", "Ville1", null));
-        propositionRepositoryMock.Setup(r => r.GetByIdAsync(new PropositionEvenementId(command.PropositionEvenementId)))
+        propositionRepositoryMock.Setup(r => r.GetByIdAsync(new PropositionEvenementId(command.PropositionEvenementId), CancellationToken.None))
             .ReturnsAsync(proposition);
 
         // Act
@@ -61,7 +61,7 @@ public class VerifierPropositionEvenementCommandHandlerTests
             Times.Once);
         unitOfWorkMock.Verify(u => u.CommitAsync(CancellationToken.None),
             Times.Once);
-        propositionRepositoryMock.Verify(r => r.GetByIdAsync(new PropositionEvenementId(command.PropositionEvenementId)),
+        propositionRepositoryMock.Verify(r => r.GetByIdAsync(new PropositionEvenementId(command.PropositionEvenementId), CancellationToken.None),
             Times.Once);
     }
 }

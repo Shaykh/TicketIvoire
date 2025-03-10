@@ -12,7 +12,7 @@ public class GetNombreAllPropositionsQueryHandler(ILogger<GetNombreAllPropositio
     public async Task<int> Handle(GetNombreAllPropositionsQuery query, CancellationToken cancellationToken)
     {
         logger.LogInformation("Entree Query GetNombre All Propositions");
-        int count = await propositionEvenementRepository.GetAllCountAsync();
+        int count = await propositionEvenementRepository.GetAllCountAsync(cancellationToken);
         logger.LogInformation("Sortie Query GetNombre All Propositions {Count} propositions", count);
         return count;
     }

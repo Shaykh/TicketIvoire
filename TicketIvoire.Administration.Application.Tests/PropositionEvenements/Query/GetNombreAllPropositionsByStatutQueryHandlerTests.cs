@@ -20,7 +20,7 @@ public class GetNombreAllPropositionsByStatutQueryHandlerTests
         // Arrange
         var query = new GetNombreAllPropositionsByStatutQuery(PropositionStatut.AVerifier);
         var handler = MakeSut(out var propositionEvenementRepositoryMock);
-        propositionEvenementRepositoryMock.Setup(r => r.GetAllCountByStatutAsync(query.Statut))
+        propositionEvenementRepositoryMock.Setup(r => r.GetAllCountByStatutAsync(query.Statut, CancellationToken.None))
             .ReturnsAsync(10);
 
         // Act
@@ -28,7 +28,7 @@ public class GetNombreAllPropositionsByStatutQueryHandlerTests
 
         // Assert
         Assert.Equal(10, result);
-        propositionEvenementRepositoryMock.Verify(r => r.GetAllCountByStatutAsync(query.Statut),
+        propositionEvenementRepositoryMock.Verify(r => r.GetAllCountByStatutAsync(query.Statut, CancellationToken.None),
             Times.Once);
     }
 }

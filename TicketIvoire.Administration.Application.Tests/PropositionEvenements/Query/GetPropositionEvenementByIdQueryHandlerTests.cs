@@ -24,7 +24,7 @@ public class GetPropositionEvenementByIdQueryHandlerTests
         var query = new GetPropositionEvenementByIdQuery(Guid.NewGuid());
         var handler = MakeSut(out var propositionEvenementRepositoryMock);
         var proposition = PropositionEvenement.Create(new UtilisateurId(Guid.NewGuid()), "nom", "description", DateTime.Now.AddDays(-1), DateTime.Now, new PropositionLieu("Lieu", "Adresse", "Ville", null));
-        propositionEvenementRepositoryMock.Setup(r => r.GetByIdAsync(new PropositionEvenementId(query.Id)))
+        propositionEvenementRepositoryMock.Setup(r => r.GetByIdAsync(new PropositionEvenementId(query.Id), CancellationToken.None))
             .ReturnsAsync(proposition);
 
         // Act
@@ -33,7 +33,7 @@ public class GetPropositionEvenementByIdQueryHandlerTests
         // Assert
         Assert.NotNull(result);
         Assert.Equal("nom", result.Nom);
-        propositionEvenementRepositoryMock.Verify(r => r.GetByIdAsync(new PropositionEvenementId(query.Id)),
+        propositionEvenementRepositoryMock.Verify(r => r.GetByIdAsync(new PropositionEvenementId(query.Id), CancellationToken.None),
             Times.Once);
     }
 
@@ -49,7 +49,7 @@ public class GetPropositionEvenementByIdQueryHandlerTests
 
         // Assert
         await Assert.ThrowsAsync<ValidationException>(act);
-        propositionEvenementRepositoryMock.Verify(r => r.GetByIdAsync(It.IsAny<PropositionEvenementId>()),
+        propositionEvenementRepositoryMock.Verify(r => r.GetByIdAsync(It.IsAny<PropositionEvenementId>(), It.IsAny<CancellationToken>()),
             Times.Never);
     }
 }

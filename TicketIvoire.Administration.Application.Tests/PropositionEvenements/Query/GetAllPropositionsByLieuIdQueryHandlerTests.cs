@@ -28,7 +28,7 @@ public class GetAllPropositionsByLieuIdQueryHandlerTests
             PropositionEvenement.Create(new UtilisateurId(Guid.NewGuid()), "nom1", "description1", DateTime.Now.AddDays(-1), DateTime.Now, new PropositionLieu("Lieu1", "Adresse1", "Ville1", null)),
             PropositionEvenement.Create(new UtilisateurId(Guid.NewGuid()), "nom2", "description2", DateTime.Now.AddDays(-1), DateTime.Now, new PropositionLieu("Lieu2", "Adresse2", "Ville2", null))
         };
-        propositionEvenementRepositoryMock.Setup(r => r.GetAllByLieuIdAsync(query.LieuId))
+        propositionEvenementRepositoryMock.Setup(r => r.GetAllByLieuIdAsync(query.LieuId, CancellationToken.None))
             .ReturnsAsync(propositions);
 
         // Act
@@ -39,7 +39,7 @@ public class GetAllPropositionsByLieuIdQueryHandlerTests
         Assert.Equal(2, result.Count());
         Assert.Equal("nom1", result.First().Nom);
         Assert.Equal("nom2", result.Last().Nom);
-        propositionEvenementRepositoryMock.Verify(r => r.GetAllByLieuIdAsync(query.LieuId),
+        propositionEvenementRepositoryMock.Verify(r => r.GetAllByLieuIdAsync(query.LieuId, CancellationToken.None),
             Times.Once);
     }
 
@@ -55,7 +55,7 @@ public class GetAllPropositionsByLieuIdQueryHandlerTests
 
         // Assert
         await Assert.ThrowsAsync<ValidationException>(act);
-        propositionEvenementRepositoryMock.Verify(r => r.GetAllByLieuIdAsync(It.IsAny<Guid>()),
+        propositionEvenementRepositoryMock.Verify(r => r.GetAllByLieuIdAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()),
             Times.Never);
     }
 }

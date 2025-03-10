@@ -27,7 +27,7 @@ public class GetAllPropositionsByDecisionQueryHandler(ILogger<GetAllPropositions
     {
         await validator.ValidateAndThrowAsync(request, cancellationToken);
         logger.LogInformation("Entree Query Get All Proposition Evenement By Decision: {Decision} PageNumber: {PageNumber} NumberByPage: {NumberByPage}", request.DecisionCode, request.PageNumber, request.NumberByPage);
-        IEnumerable<PropositionEvenement> propositionEvenements = await propositionEvenementRepository.GetAllByDecisionCodeAsync(request.DecisionCode, request.PageNumber, request.NumberByPage);
+        IEnumerable<PropositionEvenement> propositionEvenements = await propositionEvenementRepository.GetAllByDecisionCodeAsync(request.DecisionCode, request.PageNumber, request.NumberByPage, cancellationToken);
         IEnumerable<PropositionEvenementResponse> response = propositionEvenements.Select(pe => pe.ToResponse());
         logger.LogInformation("Sortie Query Get All Proposition Evenement By Decision: {Decision}, Response: {Count}", request.DecisionCode, response.Count());
         return response;

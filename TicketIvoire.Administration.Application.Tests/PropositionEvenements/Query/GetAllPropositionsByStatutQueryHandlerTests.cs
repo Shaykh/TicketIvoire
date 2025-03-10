@@ -26,7 +26,7 @@ public class GetAllPropositionsByStatutQueryHandlerTests
             PropositionEvenement.Create(new UtilisateurId(Guid.NewGuid()), "nom1", "description1", DateTime.Now.AddDays(-1), DateTime.Now, new PropositionLieu("Lieu1", "Adresse1", "Ville1", null)),
             PropositionEvenement.Create(new UtilisateurId(Guid.NewGuid()), "nom2", "description2", DateTime.Now.AddDays(-1), DateTime.Now, new PropositionLieu("Lieu2", "Adresse2", "Ville2", null))
         };
-        propositionEvenementRepositoryMock.Setup(r => r.GetAllByStatutAsync(query.Statut, null, null))
+        propositionEvenementRepositoryMock.Setup(r => r.GetAllByStatutAsync(query.Statut, null, null, CancellationToken.None))
             .ReturnsAsync(propositions);
 
         // Act
@@ -37,7 +37,7 @@ public class GetAllPropositionsByStatutQueryHandlerTests
         Assert.Equal(2, result.Count());
         Assert.Equal("nom1", result.First().Nom);
         Assert.Equal("nom2", result.Last().Nom);
-        propositionEvenementRepositoryMock.Verify(r => r.GetAllByStatutAsync(query.Statut, query.PageNumber, query.NumberByPage),
+        propositionEvenementRepositoryMock.Verify(r => r.GetAllByStatutAsync(query.Statut, query.PageNumber, query.NumberByPage, CancellationToken.None),
             Times.Once);
     }
 }

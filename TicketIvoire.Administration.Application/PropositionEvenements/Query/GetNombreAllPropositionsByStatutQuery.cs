@@ -12,7 +12,7 @@ public class GetNombreAllPropositionsByStatutQueryHandler(ILogger<GetNombreAllPr
     public async Task<int> Handle(GetNombreAllPropositionsByStatutQuery query, CancellationToken cancellationToken)
     {
         logger.LogInformation("Entree Query GetNombre All Propositions By Statut: {Statut}", query.Statut);
-        int count = await propositionEvenementRepository.GetAllCountByStatutAsync(query.Statut);
+        int count = await propositionEvenementRepository.GetAllCountByStatutAsync(query.Statut, cancellationToken);
         logger.LogInformation("Sortie Query GetNombre All Propositions By Statut {Count} propositions", count);
         return count;
     }

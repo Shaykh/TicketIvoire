@@ -13,7 +13,7 @@ public class GetNombreAllLieuxQueryHandlerTests
         // Arrange
         var lieuRepositoryMock = new Mock<ILieuRepository>();
         lieuRepositoryMock
-            .Setup(r => r.GetCountAsync())
+            .Setup(r => r.GetCountAsync(CancellationToken.None))
             .ReturnsAsync(100);
         var handler = new GetNombreAllLieuxQueryHandler(Mock.Of<ILogger<GetNombreAllLieuxQueryHandler>>(), lieuRepositoryMock.Object);
 
@@ -22,7 +22,7 @@ public class GetNombreAllLieuxQueryHandlerTests
 
         // Assert
         Assert.Equal(100, result);
-        lieuRepositoryMock.Verify(r => r.GetCountAsync(), 
+        lieuRepositoryMock.Verify(r => r.GetCountAsync(CancellationToken.None), 
             Times.Once);
     }
 }
