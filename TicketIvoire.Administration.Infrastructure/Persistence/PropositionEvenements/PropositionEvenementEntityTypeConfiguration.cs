@@ -43,5 +43,6 @@ public class PropositionEvenementEntityTypeConfiguration : IEntityTypeConfigurat
             dec.Property(d => d.UtilisateurId)
                 .IsRequired();
         });
+        builder.HasQueryFilter(e => e.DeletedAt == null);
     }
 }

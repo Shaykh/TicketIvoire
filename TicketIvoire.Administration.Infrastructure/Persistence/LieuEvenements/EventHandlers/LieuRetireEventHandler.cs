@@ -6,7 +6,7 @@ using TicketIvoire.Shared.Infrastructure.Persistence;
 
 namespace TicketIvoire.Administration.Infrastructure.Persistence.LieuEvenements.EventHandlers;
 
-public class LieuRetireEventHandler(ILogger<LieuAjouteEventHandler> logger, AdministrationDbContext dbContext) : PersisterEventHandler<LieuRetireEvent>
+public class LieuRetireEventHandler(ILogger<LieuRetireEventHandler> logger, AdministrationDbContext dbContext) : PersisterEventHandler<LieuRetireEvent>
 {
     public override async Task HandleAsync(LieuRetireEvent lieuEvent, CancellationToken cancellationToken)
     {

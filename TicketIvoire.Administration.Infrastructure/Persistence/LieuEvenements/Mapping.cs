@@ -9,7 +9,7 @@ public static class Mapping
      => new()
      {
          Adresse = lieu.Adresse,
-         Id = lieu.Id,
+         Id = lieu.LieuId,
          Nom = lieu.Nom,
          Description = lieu.Description,
          Capacite = lieu.Capacite,

@@ -29,5 +29,6 @@ public class MembreEntityTypeConfiguration : IEntityTypeConfiguration<MembreEnti
             .IsRequired();
         builder.Property(m => m.StatutAdhesion)
             .HasConversion<short>();
+        builder.HasQueryFilter(m => m.DeletedAt == null);
     }
 }

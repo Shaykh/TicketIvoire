@@ -32,5 +32,6 @@ public class LieuEntityTypeConfiguration : IEntityTypeConfiguration<LieuEntity>
                 .HasColumnName("Longitude")
                 .IsRequired();
         });
+        builder.HasQueryFilter(e => e.DeletedAt == null);
     }
 }
