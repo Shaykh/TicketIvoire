@@ -4,6 +4,8 @@ using TicketIvoire.Administration.Application.LieuEvenements.Command;
 using TicketIvoire.Administration.Application.LieuEvenements.Query;
 using TicketIvoire.Administration.Application.Membres.Command;
 using TicketIvoire.Administration.Application.Membres.Query;
+using TicketIvoire.Administration.Application.PropositionEvenements.Command;
+using TicketIvoire.Administration.Application.PropositionEvenements.Query;
 using TicketIvoire.Shared.Application;
 
 namespace TicketIvoire.Administration.Application;
@@ -18,6 +20,8 @@ public static class ServicesExtensions
         services.AddLieuEvenementQueriesValidators();
         services.AddMembreCommandsValidators();
         services.AddMembreQueriesValidators();
+        services.AddPropositionCommandsValidators();
+        services.AddPropositionQueriesValidators();
         return services;
     }
 
@@ -36,7 +40,6 @@ public static class ServicesExtensions
         services.AddTransient<IValidator<GetLieuxByCapaciteRangeQuery>, GetLieuxByCapaciteRangeQueryValidator>();
     }
 
-
     private static void AddMembreCommandsValidators(this IServiceCollection services)
     {
         services.AddTransient<IValidator<AjouterMembreCommand>, AjouterMembreCommandValidator>();
@@ -48,4 +51,23 @@ public static class ServicesExtensions
 
     private static void AddMembreQueriesValidators(this IServiceCollection services) 
         => services.AddTransient<IValidator<GetMembreByIdQuery>, GetMembreByIdQueryValidator>();
+
+
+    private static void AddPropositionCommandsValidators(this IServiceCollection services)
+    {
+        services.AddTransient<IValidator<AccepterPropositionEvenementCommand>, AccepterPropositionEvenementCommandValidator>();
+        services.AddTransient<IValidator<AjouterPropositionEvenementCommand>, AjouterPropositionEvenementCommandValidator>();
+        services.AddTransient<IValidator<RefuserPropositionEvenementCommand>, RefuserPropositionEvenementCommandValidator>();
+        services.AddTransient<IValidator<VerifierPropositionEvenementCommand>, VerifierPropositionEvenementCommandValidator>();
+    }
+
+    private static void AddPropositionQueriesValidators(this IServiceCollection services)
+    {
+        services.AddTransient<IValidator<GetAllPropositionsByDateRangeQuery>, GetAllPropositionsByDateRangeQueryValidator>();
+        services.AddTransient<IValidator<GetAllPropositionsByDecisionQuery>, GetAllPropositionsByDecisionQueryValidator>();
+        services.AddTransient<IValidator<GetAllPropositionsByLieuIdQuery>, GetAllPropositionsByLieuIdQueryValidator>();
+        services.AddTransient<IValidator<GetAllPropositionsByUtilisateurIdQuery>, GetAllPropositionsByUtilisateurIdQueryValidator>();
+        services.AddTransient<IValidator<GetNombreAllPropositionsByDecisionQuery>, GetNombreAllPropositionsByDecisionQueryValidator>();
+        services.AddTransient<IValidator<GetPropositionEvenementByIdQuery>, GetPropositionEvenementByIdQueryValidator>();
+    }
 }

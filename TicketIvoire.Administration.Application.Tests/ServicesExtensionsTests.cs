@@ -5,6 +5,8 @@ using TicketIvoire.Administration.Application.LieuEvenements.Command;
 using TicketIvoire.Administration.Application.LieuEvenements.Query;
 using TicketIvoire.Administration.Application.Membres.Command;
 using TicketIvoire.Administration.Application.Membres.Query;
+using TicketIvoire.Administration.Application.PropositionEvenements.Command;
+using TicketIvoire.Administration.Application.PropositionEvenements.Query;
 using TicketIvoire.Shared.Application.Events;
 using TicketIvoire.Shared.Domain.Events;
 
@@ -101,4 +103,40 @@ public class ServicesExtensionsTests
         // Assert
         Assert.Contains(services, s => s.ServiceType == typeof(IValidator<GetMembreByIdQuery>) && s.Lifetime == ServiceLifetime.Transient);
     }
+
+    [Fact]
+    public void GivenServiceCollection_WhenAddSharedApplication_ThenAddPropositionCommandsValidators()
+    {
+        // Arrange
+        var services = new ServiceCollection();
+
+        // Act
+        services.AddAdministrationApplication();
+
+        // Assert
+        Assert.Contains(services, s => s.ServiceType == typeof(IValidator<AccepterPropositionEvenementCommand>) && s.Lifetime == ServiceLifetime.Transient);
+        Assert.Contains(services, s => s.ServiceType == typeof(IValidator<AjouterPropositionEvenementCommand>) && s.Lifetime == ServiceLifetime.Transient);
+        Assert.Contains(services, s => s.ServiceType == typeof(IValidator<RefuserPropositionEvenementCommand>) && s.Lifetime == ServiceLifetime.Transient);
+        Assert.Contains(services, s => s.ServiceType == typeof(IValidator<VerifierPropositionEvenementCommand>) && s.Lifetime == ServiceLifetime.Transient);
+    }
+
+
+    [Fact]
+    public void GivenServiceCollection_WhenAddSharedApplication_ThenAddPropositionQueriesValidators()
+    {
+        // Arrange
+        var services = new ServiceCollection();
+
+        // Act
+        services.AddAdministrationApplication();
+
+        // Assert
+        Assert.Contains(services, s => s.ServiceType == typeof(IValidator<GetAllPropositionsByDateRangeQuery>) && s.Lifetime == ServiceLifetime.Transient);
+        Assert.Contains(services, s => s.ServiceType == typeof(IValidator<GetAllPropositionsByDecisionQuery>) && s.Lifetime == ServiceLifetime.Transient);
+        Assert.Contains(services, s => s.ServiceType == typeof(IValidator<GetAllPropositionsByLieuIdQuery>) && s.Lifetime == ServiceLifetime.Transient);
+        Assert.Contains(services, s => s.ServiceType == typeof(IValidator<GetAllPropositionsByUtilisateurIdQuery>) && s.Lifetime == ServiceLifetime.Transient);
+        Assert.Contains(services, s => s.ServiceType == typeof(IValidator<GetNombreAllPropositionsByDecisionQuery>) && s.Lifetime == ServiceLifetime.Transient);
+        Assert.Contains(services, s => s.ServiceType == typeof(IValidator<GetPropositionEvenementByIdQuery>) && s.Lifetime == ServiceLifetime.Transient);
+    }
+
 }
