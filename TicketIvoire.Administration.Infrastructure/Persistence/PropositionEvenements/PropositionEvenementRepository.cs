@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TicketIvoire.Administration.Domain.PropositionEvenements;
 using TicketIvoire.Administration.Domain.Utilisateurs;
+using TicketIvoire.Shared.Application.Exceptions;
 using TicketIvoire.Shared.Infrastructure.Persistence;
 
 namespace TicketIvoire.Administration.Infrastructure.Persistence.PropositionEvenements;
@@ -82,7 +83,7 @@ public class PropositionEvenementRepository(AdministrationDbContext dbContext) :
         PropositionEvenementEntity entity = await _dbSet
             .AsNoTracking()
             .SingleOrDefaultAsync(e => e.Id == id.Value)
-            ?? throw new DataAccessException($"Impossible de trouver la proposition d'évenement avec l'identifiant {id.Value}");
+            ?? throw new NotFoundException($"Impossible de trouver la proposition d'évenement avec l'identifiant {id.Value}");
         return entity.ToDomain();
     }
 }

@@ -2,10 +2,10 @@
 
 public interface ILieuRepository
 {
-    Task<Lieu> GetByIdAsync(Guid lieuId);
-    Task<IEnumerable<Lieu>> GetAllAsync(uint? pageNumber, uint? numberByPage);
-    Task<IEnumerable<Lieu>> GetAllByVilleAsync(string ville);
-    Task<IEnumerable<Lieu>> GetAllByCapaciteRangeAsync(uint? minimum, uint? maximum);
-    Task<int> GetCountAsync();
-    Task<int> GetCountByVilleAsync(string ville);
+    Task<Lieu> GetByIdAsync(Guid lieuId, CancellationToken cancellationToken = default);
+    Task<IEnumerable<Lieu>> GetAllAsync(uint? pageNumber, uint? numberByPage, CancellationToken cancellationToken = default);
+    Task<IEnumerable<Lieu>> GetAllByVilleAsync(string ville, CancellationToken cancellationToken = default);
+    Task<IEnumerable<Lieu>> GetAllByCapaciteRangeAsync(uint? minimum, uint? maximum, CancellationToken cancellationToken = default);
+    Task<int> GetCountAsync(CancellationToken cancellationToken = default);
+    Task<int> GetCountByVilleAsync(string ville, CancellationToken cancellationToken = default);
 }

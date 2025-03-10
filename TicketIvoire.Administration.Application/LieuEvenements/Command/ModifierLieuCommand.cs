@@ -36,7 +36,7 @@ public class ModifierLieuCommandHandler(ILogger<ModifierLieuCommandHandler> logg
     {
         await validator.ValidateAndThrowAsync(request, cancellationToken);
         logger.LogInformation("Command Modification d'un lieu {Command}", request);
-        Lieu lieu = await lieuRepository.GetByIdAsync(request.LieuId);
+        Lieu lieu = await lieuRepository.GetByIdAsync(request.LieuId, cancellationToken);
         lieu.Modifier(request.Nom, request.Description, request.Adresse, request.Ville, request.Capacite);
         domainEventsContainer.AddEvents(lieu.DomainEvents);
         lieu.ClearEvents();

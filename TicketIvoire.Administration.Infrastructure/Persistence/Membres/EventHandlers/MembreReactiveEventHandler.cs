@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TicketIvoire.Administration.Domain.Membres.Events;
+using TicketIvoire.Shared.Application.Exceptions;
 using TicketIvoire.Shared.Infrastructure.Persistence;
 
 namespace TicketIvoire.Administration.Infrastructure.Persistence.Membres.EventHandlers;
@@ -11,7 +12,7 @@ public class MembreReactiveEventHandler(ILogger<MembreReactiveEventHandler> logg
     {
         logger.LogInformation("Persistence réactivation membre {MembreId}", membreEvent.MembreId);
         MembreEntity entityToDeactive = await dbContext.Membres.SingleOrDefaultAsync(m => m.Id == membreEvent.MembreId, cancellationToken)
-            ?? throw new DataAccessException($"Aucun membre avec l'identifiant {membreEvent.MembreId} n'a été trouvé");
+            ?? throw new NotFoundException($"Aucun membre avec l'identifiant {membreEvent.MembreId} n'a été trouvé");
         entityToDeactive.EstActif = true;
         logger.LogInformation("Fin Persistence réactivation membre {MembreId}", membreEvent.MembreId);
     }

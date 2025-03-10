@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TicketIvoire.Administration.Domain.Membres;
+using TicketIvoire.Shared.Application.Exceptions;
 using TicketIvoire.Shared.Infrastructure.Persistence;
 
 namespace TicketIvoire.Administration.Infrastructure.Persistence.Membres;
@@ -32,7 +33,7 @@ public class MembreRepository(AdministrationDbContext dbContext) : IMembreReposi
         MembreEntity membre = await _membres
             .AsNoTracking()
             .FirstOrDefaultAsync(m => m.Id == id.Value) ??
-            throw new DataAccessException($"Le membre d'identifiant {id.Value} n'a pas été trouvé");
+            throw new NotFoundException($"Le membre d'identifiant {id.Value} n'a pas été trouvé");
         return membre.ToDomain();
     }
 

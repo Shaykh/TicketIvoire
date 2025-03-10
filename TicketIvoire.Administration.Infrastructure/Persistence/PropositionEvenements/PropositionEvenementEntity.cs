@@ -12,5 +12,7 @@ public class PropositionEvenementEntity : AuditableEntity
     public PropositionStatut PropositionStatut { get; set; } = PropositionStatut.AVerifier;
     public required PropositionLieu Lieu { get; set; }
     public required Guid UtilisateurId { get; set; }
-    public PropositionDecision? Decision { get; set; }
+    public PropositionDecisionEntity? Decision { get; set; }
 }
+
+public record PropositionDecisionEntity(Guid UtilisateurId, DateTime DateDecision, string Code, string? Raisons);

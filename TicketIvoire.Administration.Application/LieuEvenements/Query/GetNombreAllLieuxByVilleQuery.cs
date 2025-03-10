@@ -20,7 +20,7 @@ public class GetNombreAllLieuxByVilleQueryHandler(ILogger<GetNombreAllLieuxByVil
     {
         await validator.ValidateAndThrowAsync(request, cancellationToken);
         logger.LogInformation("Entree Query Get Nombre All Lieux By Ville: {Ville}", request.Ville);
-        int nombre = await lieuRepository.GetCountByVilleAsync(request.Ville);
+        int nombre = await lieuRepository.GetCountByVilleAsync(request.Ville, cancellationToken);
         logger.LogInformation("Sortie Query Get Nombre All Lieux By Ville: {Ville} : {Count}", request.Ville, nombre);
         return nombre;
     }

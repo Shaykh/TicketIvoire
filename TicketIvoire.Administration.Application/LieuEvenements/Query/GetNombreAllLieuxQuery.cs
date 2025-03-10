@@ -12,7 +12,7 @@ public class GetNombreAllLieuxQueryHandler(ILogger<GetNombreAllLieuxQueryHandler
     public async Task<int> Handle(GetNombreAllLieuxQuery request, CancellationToken cancellationToken)
     {
         logger.LogInformation("Entree Query Get Nombre All Lieux");
-        int nombre = await lieuRepository.GetCountAsync();
+        int nombre = await lieuRepository.GetCountAsync(cancellationToken);
         logger.LogInformation("Sortie Query Get Nombre All Lieux : {Count}", nombre);
         return nombre;
     }

@@ -20,7 +20,7 @@ public class GetLieuByIdQueryHandler(ILogger<GetLieuByIdQueryHandler> logger,
     {
         await validator.ValidateAndThrowAsync(query, cancellationToken);
         logger.LogInformation("Entree Query Get Lieu By Id: {LieuId}", query.Id);
-        Lieu lieu = await lieuRepository.GetByIdAsync(query.Id);
+        Lieu lieu = await lieuRepository.GetByIdAsync(query.Id, cancellationToken);
         var response = lieu.ToGetLieuResponse();
         logger.LogInformation("Sortie Query Get Lieu By Id Response: {Response}", response);
         return response;

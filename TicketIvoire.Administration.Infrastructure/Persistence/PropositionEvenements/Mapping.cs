@@ -18,6 +18,9 @@ public static class Mapping
             UtilisateurId = propositionEvenement.UtilisateurId 
         };
 
+    public static PropositionDecisionEntity ToEntity(this PropositionDecision decision)
+        => new(decision.UtilisateurId.Value, decision.DateDecision, decision.Code, decision.Raisons);
+
     public static PropositionEvenement ToDomain(this PropositionEvenementEntity propositionEntity)
         => new()
         {
@@ -27,8 +30,11 @@ public static class Mapping
             Id = new PropositionEvenementId(propositionEntity.Id),
             Lieu = propositionEntity.Lieu,
             Nom = propositionEntity.Nom,
-            PropositionDecision = propositionEntity.Decision,
+            PropositionDecision = propositionEntity.Decision?.ToDomain(),
             PropositionStatut = propositionEntity.PropositionStatut,
             UtilisateurId = new UtilisateurId(propositionEntity.UtilisateurId)
         };
+
+    public static PropositionDecision ToDomain(this PropositionDecisionEntity decisionEntity)
+        => new (new UtilisateurId(decisionEntity.UtilisateurId), decisionEntity.DateDecision, decisionEntity.Code, decisionEntity.Raisons);
 }

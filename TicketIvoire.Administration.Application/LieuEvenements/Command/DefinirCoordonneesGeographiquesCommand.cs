@@ -32,7 +32,7 @@ public class DefinirCoordonneesGeographiquesCommandHandler(ILogger<DefinirCoordo
     {
         await validator.ValidateAndThrowAsync(request, cancellationToken);
         logger.LogInformation("Command Définition des coordonnées géographiques d'un lieu {Command}", request);
-        Lieu lieu = await lieuRepository.GetByIdAsync(request.LieuId);
+        Lieu lieu = await lieuRepository.GetByIdAsync(request.LieuId, cancellationToken);
         lieu.DefinirCoordonneesGeographiques(new LieuCoordonneesGeographiques(request.Latitude, request.Longitude));
         domainEventsContainer.AddEvents(lieu.DomainEvents);
         lieu.ClearEvents();

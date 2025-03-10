@@ -33,7 +33,7 @@ public class RetirerLieuCommandHandler(ILogger<RetirerLieuCommandHandler> logger
     {
         await validator.ValidateAndThrowAsync(request, cancellationToken);
         logger.LogInformation("Command Retrait d'un lieu {LieuId} pour raisons: {Raisons} par {UtilisateurId}", request.LieuId, request.Raisons, request.UtilisateurId);
-        Lieu lieu = await lieuRepository.GetByIdAsync(request.LieuId);
+        Lieu lieu = await lieuRepository.GetByIdAsync(request.LieuId, cancellationToken);
         lieu.Supprimer(request.Raisons, new UtilisateurId(request.UtilisateurId));
         domainEventsContainer.AddEvents(lieu.DomainEvents);
         lieu.ClearEvents();

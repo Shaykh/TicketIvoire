@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TicketIvoire.Administration.Domain.LieuEvenements.Events;
+using TicketIvoire.Shared.Application.Exceptions;
 using TicketIvoire.Shared.Infrastructure.Persistence;
 
 namespace TicketIvoire.Administration.Infrastructure.Persistence.LieuEvenements.EventHandlers;
@@ -11,7 +12,7 @@ public class LieuCoordonneesGeographiquesDefiniesEventHandler(ILogger<LieuCoordo
     {
         logger.LogInformation("Persistence de la définition des coordonnées géographiques d'un lieu {LieuId}", lieuEvent.LieuId);
         LieuEntity entityToUpdate = await dbContext.Lieux.SingleOrDefaultAsync(l => l.Id == lieuEvent.LieuId, cancellationToken)
-            ?? throw new DataAccessException($"Aucun lieu avec l'identifiant {lieuEvent.LieuId} n'a été trouvé");
+            ?? throw new NotFoundException($"Aucun lieu avec l'identifiant {lieuEvent.LieuId} n'a été trouvé");
         entityToUpdate.CoordonneesGeographiques = new Domain.LieuEvenements.LieuCoordonneesGeographiques(lieuEvent.Latitude, lieuEvent.Longitude);
         entityToUpdate.Update(Guid.Empty);
         logger.LogInformation("Fin Persistence de la définition des coordonnées géographiques d'un lieu {LieuId}", lieuEvent.LieuId);
