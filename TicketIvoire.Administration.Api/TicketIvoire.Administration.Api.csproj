@@ -22,4 +22,12 @@
     <ProjectReference Include="..\TicketIvoire.ServiceDefaults\TicketIvoire.ServiceDefaults.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\Cheick\Source\Repos\TicketIvoire\TicketIvoire.Administration.Api\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\Cheick\Source\Repos\TicketIvoire\TicketIvoire.Administration.Api\.editorconfig" />
+  </ItemGroup>
+
 </Project>

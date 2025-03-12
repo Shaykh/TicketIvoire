@@ -1,19 +1,26 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using TicketIvoire.Administration.Infrastructure.Persistence;
 using TicketIvoire.Shared.Application.Exceptions;
 using TicketIvoire.Shared.Domain.Exceptions;
 
 namespace TicketIvoire.Administration.Api.Middlewares;
 
-internal sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IExceptionHandler
+public sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IExceptionHandler
 {
     public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
     {
+        if (exception is null)
+        {
+            return false;
+        }
         logger.LogError(exception, "Erreur serveur {Message}", exception.Message);
 
         ProblemDetails details = SetProblemDetails(exception, out int statusCode);
-
+        if (httpContext is null)
+        {
+            return false;
+        }
         httpContext
             .Response
                 .StatusCode = statusCode;
@@ -56,6 +63,17 @@ internal sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> log
             {
                 Status = statusCode,
                 Detail = badRequestException.Message,
+                Title = "Requête non valide"
+            };
+        }
+
+        if (exception is ValidationException validationException)
+        {
+            statusCode = StatusCodes.Status400BadRequest;
+            return new ProblemDetails
+            {
+                Status = statusCode,
+                Detail = validationException.Message,
                 Title = "Requête non valide"
             };
         }
